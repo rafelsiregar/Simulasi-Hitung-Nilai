@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main3Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/txtHarian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="Nilai Rerata Harian" />
+
+        <EditText
+            android:id="@+id/txtBobot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="Bobot"
+            android:textColor="#1E90FF"/>
+
+        <EditText
+            android:id="@+id/txtUTS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="Nilai UTS" />
+
+        <EditText
+            android:id="@+id/txtUAS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:hint="Nilai UAS" />
+
+        <Button
+            android:id="@+id/input100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Nilai Akhir(0-100)" />
+
+        <Button
+            android:id="@+id/input4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Nilai Akhir(0-4)" />
+
+        <Button
+            android:id="@+id/home3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Home" />
+
+        <TextView
+            android:id="@+id/txtNilai100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input100"
+            android:textColor="#990000"
+            android:textSize="15pt" />
+
+        <TextView
+            android:id="@+id/txtNilai4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#228B22"
+            android:textSize="15pt"
+            android:layout_below = "@+id/input4"/>
+
+        <TextView
+            android:id="@+id/NilaiHuruf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/input4"
+            android:layout_weight="1"
+            android:text=""
+            android:textSize="15pt"
+            android:textColor="#3333FF" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
