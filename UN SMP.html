@@ -15,13 +15,16 @@
 <!--CSS Tambahan-->
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-dark">   
+<body class=main-program>   
   <div id="header"></div>
     <!--Program Utama untuk Membandingkan nilai UN SMP-->
-    <div class="main-element">
+    <div class="container-fluid">
+        <div class="main-element">
+        </div>
     </div>
 
-    <script src="src/general.js"></script>
+    <script src="../src/general_alert.js"></script>
+    <script src="../src/general_school.js"></script>
     <script src="src/jquery_implementation.js">
     </script>
     <script src="src/components.js"></script>
@@ -52,11 +55,11 @@
 
         if(noOutOfRange(un1, 0, 100) && noOutOfRange(un2, 0, 100)){
             if(sum1>sum2){
-            alert("Nilai rata-rata UN "+sekolah1+" lebih tinggi dibandingkan "+sekolah2);
+                setText("Nilai rata-rata UN "+sekolah1+" lebih tinggi dibandingkan "+sekolah2);
             } else if (sum1<sum2){
-                alert("Nilai rata-rata UN "+sekolah2+" lebih tinggi dibandingkan "+sekolah1);
+               setText("Nilai rata-rata UN "+sekolah2+" lebih tinggi dibandingkan "+sekolah1);
             } else {
-                alert("Nilai rata-rata UN "+sekolah1+" sama dengan "+sekolah2);
+                setText("Nilai rata-rata UN "+sekolah1+" sama dengan "+sekolah2);
             }
         } else {
             alert("Mohon maaf, data yang anda masukkan tidak valid");

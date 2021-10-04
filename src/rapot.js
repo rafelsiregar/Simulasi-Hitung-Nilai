@@ -1,35 +1,7 @@
-//Mengolah Alert
-function errorAlert(){alert("Mohon maaf, ada kesalahan dalam input data");}
-function unfilledAlert(){alert("Mohon maaf, data harus diisi");}
-
-function openHidden(id){document.getElementById(id).hidden=false;}
-function closeHidden(id){document.getElementById(id).hidden=true;}
-
-var pointer = {tugas : 0, ulangan : 0};
-
-var input = document.getElementById("input_aspek");
-var aspect = document.getElementsByClassName("ket_aspek");
-var button = document.getElementById("add_addit"); 
-var confirm = document.getElementById("confirm");
-var additional = [];
-
-
+var pointer = construct_pointer({tugas : 0, ulangan : 0});
 
 //Untuk menjalankan fungsi JQuery
 $(document).ready(function(){
-    
-    $('#add_tugas').click(function(){
-        pointer['tugas']++;
-        $('#info_tugas').append(generateTaskText(pointer['tugas']));
-        checkPointer();
-    })
-
-    $('#sub_tugas').click(function(){
-        $('#tugas_ke_'+(pointer['tugas'])).remove();
-        pointer['tugas']--;
-        checkPointer();
-    })    
-
     $("#add_ulangan").click(function(){
         pointer['ulangan']++;
         console.log(pointer['ulangan'])
@@ -42,48 +14,6 @@ $(document).ready(function(){
         pointer['ulangan']--;
         checkPointer();
     })    
-
-
-    $('#add_addit').click(function(){
-
-        toggleButton();
-        
-        //Kalau udah menginput aspeknya
-        $("#input_aspek").keyup(function(e) {
-            if(e.keyCode == 13 && $(this).val()!=="") {
-                    e.preventDefault();
-                    $("#add_element").click() 
-            }
-        });
-    })
-
-    $("#add_element").click(function(){
-        var val = $("#input_aspek").val();
-        //Generate Aspek
-        if(!additional.includes(val))
-        $('#info_bonus').append(generateAdditionalText(val));
-        else alert("Aspek sudah ada");
-        //Mengembalikan button ke tempat semula
-        toggleButton();
-        $("#input_aspek").val("");
-    })
-
-    $('#enable_bonus').click(function (){
-        var id = $(this).attr('id');
-        var aspek = document.getElementsByClassName("aspek");
-        if($(`#${id}`).is(':checked')){
-            for(var i=0;i<aspek.length;i++){
-                aspek[i].disabled = false;
-                
-            }
-        } else {
-            for(var i=0;i<aspek.length;i++){
-                aspek[i].disabled = true;
-                aspek[i].value="";
-            }
-            returnToDefault();
-        }
-    });
 });
 
 function checkPointer(){
@@ -139,62 +69,6 @@ function generateTestText(i){
 </div>`
 }
 
-function generateAdditionalText(aspek){
-    additional.push(aspek);
-    return `<div class="data_addit" id="aspek_${aspek.toLowerCase().replace(" ", "_")}">
-         <p> ${aspek} </p>
-         <div class="form-row data_aspek">
-         <div class="form-group col-sm-2">
-             <input type="number" class="aspek nilai_aspek form-control input-sm"
-             id= "nilai_aspek_${aspek.toLowerCase().replace(" ", "_")}"  placeholder="Nilai" min="1">
-         </div>
-         <div class="form-group col-sm-2">
-             <input type="number" class="aspek bobot_aspek form-control input-sm"  
-             id="bobot_aspek_${aspek.toLowerCase().replace(" ", "_")}" placeholder="Bobot" min="1">
-         </div>
-         <div class="form-group col-sm-2">
-            <button type="button" id="remove_aspek_${aspek.toLowerCase().replace(" ", "_")}" 
-            class="btn btn-secondary aspek" onclick = "removeAspect('${aspek}')">
-            Hapus Aspek </button>
-         </div>
-       </div>
-       </div>`
-}
-
-function removeAspect(aspek){
-    document.getElementById("aspek_"+aspek.toLowerCase().replace(" ", "_")).remove();
-    removeElement(aspek, additional);
-}
-
-function removeElement(element, array){
-    var index = array.indexOf(element);
-    if (index !== -1) {
-    array.splice(index, 1);
-    }
-}
-
-
-function changeButton(){
-    button.className = button.className.replace(/col-sm-6/g, "col-sm-2");
-    confirm.style.display="inline";
-    button.innerHTML = "Batal Menambah Aspek";
-}
-
-
-function returnToDefault(){
-    button.className = button.className.replace(/col-sm-2/g, "col-sm-6");
-    confirm.style.display="none";
-    button.innerHTML = "Tambah Aspek";
-}
-
-function toggleButton(){
-    //Mengecilkan button
-    if(button.className.match(/col-sm-6/g)){
-        changeButton();
-    } else if(button.className.match(/col-sm-2/g)){
-        returnToDefault();
-    }
-}
 
 function getSum(className){
     var classElement = document.getElementsByClassName(className);
@@ -227,6 +101,18 @@ function count(){
         tugas : document.getElementById('input_bobot_tugas').value,
         uts : document.getElementById('input_bobot_uts').value,
         uas : document.getElementById('input_bobot_uas').value
+    }
+
+    var bonus = {
+        tambahan : document.getElementsByClassName('nilai_aspek'),
+        bobot : document.getElementsByClassName('bobot_aspek')
+    }
+
+    var bonus_score = 0;
+
+    for(var i=0;i<bonus['tambahan'].length;i++){
+        if(bonus['bobot'][i].value=="") bonus['bobot'][i].value=1;
+        bonus_score += Number(bonus['tambahan'][i].value)*Number(bonus['bobot'][i].value);
     }
 
 
@@ -274,7 +160,9 @@ function count(){
 
     console.log(uas)
     var nilai_akhir = (elemen_harian*nilai_harian['bobot']+
-    Number(uts['nilai'])*uts['bobot']+Number(uas['nilai']*uas['bobot']))/Number(nilai_harian['bobot']+uts['bobot']+uas['bobot'])
+    Number(uts['nilai'])*uts['bobot']+Number(uas['nilai']*uas['bobot']))/Number(nilai_harian['bobot']+uts['bobot']+uas['bobot']);
+
+    nilai_akhir = nilai_akhir+bonus_score>100? 100:nilai_akhir+bonus_score;
 
 
     document.getElementById("nilai_utama").innerHTML = "<b>"+Math.round(nilai_akhir)+"</b>";
@@ -297,6 +185,29 @@ function open(id){
 function open(id, value){
     openHidden("div_"+id);
     document.getElementById("elemen_"+id).innerHTML=value;
+}
+
+function generateAdditionalText(aspek){
+    additional.push(aspek);
+    console.log(aspek.toLowerCase().replace(" ", "_"))
+    return `<div class="data_addit" id="aspek_${aspek.toLowerCase().replace(" ", "_")}">
+         <p> ${aspek} </p>
+         <div class="form-row data_aspek">
+         <div class="form-group col-sm-2">
+             <input type="number" class="aspek nilai_aspek form-control input-sm"
+             id= "nilai_aspek_${aspek.toLowerCase().replace(" ", "_")}"  placeholder="Tambahan" min="1">
+         </div>
+         <div class="form-group col-sm-2">
+             <input type="number" class="aspek bobot_aspek form-control input-sm"  
+             id="bobot_aspek_${aspek.toLowerCase().replace(" ", "_")}" placeholder="Pengali" min="1">
+         </div>
+         <div class="form-group col-sm-2">
+            <button type="button" id="remove_aspek_${aspek.toLowerCase().replace(" ", "_")}" 
+            class="btn btn-secondary aspek" onclick = "removeAspect('${aspek}')">
+            Hapus Aspek </button>
+         </div>
+       </div>
+       </div>`
 }
 
 
@@ -351,4 +262,6 @@ function getGrade(num){
         }
     
 }
+
+
 

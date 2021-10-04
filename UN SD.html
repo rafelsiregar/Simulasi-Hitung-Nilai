@@ -15,14 +15,19 @@
 <!--CSS Tambahan-->
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-dark">   
-  <div id="header"></div>
+
+<body class="main-program">   
     <!--Program Utama untuk Membandingkan nilai UN SD-->
-    <div class="main-element">
+    <div id="header"></div>
+    <div class="container-fluid main-program">
+        <div class="main-element">
+        </div>
+        <footer class="d-flex justify-content-center disclaimer" >
+            <h6><danger>DISCLAIMER : </danger> SD tidak memiliki input sehingga nilai UN-nya tidak perlu dibandingkan. Aplikasi ini <br>
+                hanya digunakan untuk pembelajaran Pemrograman Web Dasar.</h6>
+        </footer>
     </div>
     
-
-    <script src="src/general.js"></script>
     <script src="src/components.js"></script>
     <script>
 
@@ -46,27 +51,30 @@
 
         if(noOutOfRange(un1, 0, 100) && noOutOfRange(un2, 0, 100)){
             if(sum1>sum2){
-            alert("Nilai rata-rata UN "+sekolah1+" lebih tinggi dibandingkan "+sekolah2);
+                setText("Nilai rata-rata UN "+sekolah1+" lebih tinggi dibandingkan "+sekolah2);
             } else if (sum1<sum2){
-                alert("Nilai rata-rata UN "+sekolah2+" lebih tinggi dibandingkan "+sekolah1);
+                setText("Nilai rata-rata UN "+sekolah2+" lebih tinggi dibandingkan "+sekolah1);
             } else {
-                alert("Nilai rata-rata UN "+sekolah1+" sama dengan "+sekolah2);
+                setText("Nilai rata-rata UN "+sekolah1+" sama dengan "+sekolah2);
             }
         } else {
             alert("Mohon maaf, data yang anda masukkan tidak valid");
         }
 
-        document.getElementById("report").style.display="block";
-        getSchool("sekolah1", 0);getSchool("sekolah2", 1);
-        getValue("avg1", (sum1/6).toFixed(2)); getValue("avg2", (sum2/6).toFixed(2));
+        $("#report").css('display', "block");
+        getSchool("sekolah1", 0);
+        getSchool("sekolah2", 1);
+        getValue("avg1", (sum1/3).toFixed(2)); 
+        getValue("avg2", (sum2/3).toFixed(2));
         getValue("selisih", (Math.abs((sum1/3)-(sum2/3))).toFixed(2));
 
         }
+
     </script>
+    <script src="../src/general_alert.js"></script>
+    <script src="../src/general_school.js"></script>
      <script src="../src/jquery_implementation.js"></script>
-    <footer class="d-flex justify-content-center">
-        <h6><danger>DISCLAIMER : </danger> SD tidak memiliki input sehingga nilai UN-nya tidak perlu dibandingkan. Aplikasi ini <br>
-            hanya digunakan untuk pembelajaran Pemrograman Web Dasar.</h6>
-        </footer>
     </body>
     </html>
+
+    

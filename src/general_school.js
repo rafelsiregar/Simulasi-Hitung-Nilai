@@ -1,25 +1,10 @@
-
-//Mengolah Alert
-
-const Error = {
-    errorAlert : () => alert("Mohon maaf, ada kesalahan dalam input data"),
-    unfilledAlert : () =>alert("Mohon maaf, data harus diisi")
-};
-
-const HiddenState = {
-    openHidden : (id) =>document.getElementById(id).hidden=false,
-    closeHidden : (id) => document.getElementById(id).hidden=true
-};
-
-
 function getSchool(id, schoolIndex){
-    document.getElementsByName(id).innerHTML = 
-    document.getElementsByName("school")[schoolIndex].value;
+    $('#'+id).val($("input[name='school']").eq(schoolIndex).val())
+    
 }
 
 function getValue(id, variable){
-    document.getElementById(id).innerHTML =
-    variable;
+    $('#'+id).html(variable);
 }
 
 

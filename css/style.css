@@ -38,9 +38,6 @@ a {
   }
 
 
-
-
-
 .dropdown-toggle::after {
     content: none;
 }
@@ -51,13 +48,14 @@ div.main-element {
     justify-content: center;
 }
 
-section {
+section, #title, b {
     font-family: 'Montserrat', sans-serif;
 }
 
+
 #home {
     padding : 5vh 5vw;
-    height: 100vh;
+    height: 80vh;
     background-size:cover;
     background: url('/assets/img/background1.jpg') rgba(43, 0, 0, 0.8);
     background-blend-mode: multiply;
@@ -93,6 +91,11 @@ section {
 .container h1 {
     font-weight: bold;
 }
+
+.main-element h1 {
+    margin: 5vh 0;
+}
+
 
 .feature-box, .helping-box {
     border-radius: 10px;
@@ -132,17 +135,52 @@ section {
     color : white;
     padding: 2vh 1vw 1vh;
     cursor: pointer;
+}
 
-    
+.feature .helping-box h3 {
+    font-weight: bold;
 }
 
 .helping-box * {
     margin-top: 1vh;
 }
 
-.icon-layanan {
+.icon-layanan, .helping-box img {
     height: 60%;
     width: 50%;
+}
+
+.nav-tabs {
+    margin-top: 5vh;
+}
+
+.nav-tabs .nav-link {
+    font-family: 'Ubuntu';
+    color : white;
+}
+
+.nav-tabs .nav-link.active{
+    background: none;
+    font-weight: bold;
+    color : white;
+    border: none;
+}
+
+.nav-tabs .nav-link:hover{
+    background: none;
+    font-weight: bold;
+    border : none;
+    color : white;
+    font-family:'Montserrat';
+    
+}
+
+.nav-tabs .nav-link:not(.active):hover{
+    font-weight: normal;
+}
+
+.nav-tabs .nav-link.active:hover{
+    font-weight: bold;
 }
 
 
@@ -189,6 +227,10 @@ h1 {
     justify-content: center;
 }
 
+.btn:hover {
+    color : white;
+}
+
 .btn-custom-maroon {
     background-color : maroon;
     color : white;
@@ -197,6 +239,27 @@ h1 {
     border-radius: 2rem;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
+}
+
+.btn-custom-add {
+    background-color : rgb(1, 39, 133);
+    color : white;
+    padding: 1vh 1vw;
+    border-radius: 2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-custom-light {
+    background-color : rgb(150, 1, 1);
+    color : white;
+    padding: 1vh 1vw;
+    border-radius: 2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-custom-add:focus, .btn-custom-light:focus {
+    box-shadow: 5px white;
+    border: none;
 }
 
 .btn-send-email {
@@ -209,7 +272,8 @@ h1 {
 }
 
 .form-email {
-    width : 25vw;border-radius: 10px;background-color: rgb(79, 79, 79);border: none;
+    width : 25vw;border-radius: 10px;background-color: rgb(79, 79, 79);
+    border: none;
     color:rgb(49, 15, 15) !important;
 }
 
@@ -223,7 +287,6 @@ h1 {
     color : white;
 }
 
-
 .split {
   height: 60%;
   width: 50%;
@@ -234,10 +297,54 @@ h1 {
   position: fixed;
 }
 
-/*body {
-    background-color: rgb(100, 0, 0);
-    overflow-x: hidden;
-}*/
+.back-to-main {  
+    font-family: 'Montserrat', sans-serif;
+}
+
+.back-to-main:hover {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+#back {
+    margin: 2vh 1vw;
+}
+
+
+body.main-program {
+    background-color: rgb(100,0,0);
+}
+
+.container-fluid {
+    margin: 0;padding: 0;
+}
+
+footer.disclaimer {
+    background-color: rgb(31, 28, 28);
+    padding: 2vh 0;
+    width: 100%;
+    top : 100%;
+    position: absolute;
+}
+
+.info-sekolah .form-control, .info-jenjang .form-control{
+    width:15vw;
+    background-color: gray;
+    border-radius: 10px;
+    border: none;
+    color : rgb(44, 0, 0);
+}
+
+label, p, ol li {
+    font-family: 'Montserrat';
+}
+
+#result {
+    font-weight: bold;
+    font-size: 20pt;
+}
+
 
 .primary {
     justify-content: left;
@@ -246,7 +353,9 @@ h1 {
 }
 
 .head {
+    font-weight: bold;
     font-size: 15pt;
+    margin: 3vh 0;
 }
 
 .grade {
@@ -255,8 +364,10 @@ h1 {
 }
 
 .number {
-    color : red;
+    color : rgb(213, 0, 0);
     font-size: 24pt;
+    font-weight: bold;
+    font-family: 'Ubuntu';
 }
 
 
@@ -272,6 +383,8 @@ h1 {
 
 .secondary {
     color : white;
+    font-size: 12pt;
+    font-family: 'Montserrat';
 }
 
 .main-info {
@@ -295,7 +408,7 @@ h1 {
     font-size: 30pt;
 }
 
-.onepoint {
+.onepoint, .vthree {
     font-size: 25pt;
 }
 

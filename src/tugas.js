@@ -1,20 +1,8 @@
   
-  //Mengolah Alert
-  function errorAlert(){
-    alert("Mohon maaf, ada kesalahan dalam input data");
-  }
-
-  function unfilledAlert(){
-    alert("Mohon maaf, data harus diisi");
-  }
-
-  
   function openHidden(tag_name){
     var x = document.getElementById(tag_name);
     x.style.display="block";
   }
-
-
 
   function write_form(id){
     var form = "jumlah_soal_"+id;
@@ -23,13 +11,23 @@
   }
 
 
+  $(document).ready(function(){
+    $('#add_another_aspect').click(function(){
+      $('#another_aspect').slideToggle();
+      $('#add_another_aspect').toggleClass('btn-light btn-secondary');
+        $('#add_another_aspect').text( $('#add_another_aspect').text() == "Tampilkan jenis soal lainnya" ? 
+        "Sembunyikan jenis soal lainnya" : "Tampilkan jenis soal lainnya");
+    })
+  });
+
+
 
   //Mengolah Autoinput
   function autoInput(nama){
-    if(nama=="isian"){
-      document.getElementById("skor_"+nama).value=(2*Number(document.getElementById("soal_"+nama).value));
-    }
-    else{document.getElementById("skor_"+nama).value=document.getElementById("soal_"+nama).value;}  
+      if(nama=="isian"){
+        document.getElementById("skor_"+nama).value=(2*Number(document.getElementById("soal_"+nama).value));
+      }
+      else{document.getElementById("skor_"+nama).value=document.getElementById("soal_"+nama).value;}  
   }
 
   //Mengolah toggle
@@ -72,8 +70,6 @@
     document.getElementById("keterangan_"+nama).hidden=false;
   }
 
-
-
   function getFixedScoreInfo(nama){
     /*Benar adalah variabel untuk menyimpan jumlah betul, 
     nilai adalah variabel untuk menyimpan skor*/
@@ -105,7 +101,52 @@
   }
 
 
-  
+  //Mengolah nilai soal obyektif dengan lebih dari satu grup
+  function getSemiFixedScoreInfo(nama){
+    if(check_hidden(nama)) return 0;
+    var raw_class = {
+        soal : document.getElementsByClassName("soal_"+nama),
+        benar : document.getElementsByClassName("benar_"+nama),
+        maksimum : document.getElementsByClassName("skor_"+nama)
+    }
+    var keterangan = {
+      soal : 0,
+      benar : 0,
+      maksimum : 0
+    }
+    
+
+    var skor_per_soal = [];
+    var nilai_benar = [];
+    var total = {benar : 0, total : 0}
+
+    for(var i=0;i<raw_class['soal'].length;i++){
+      keterangan['soal'] += Number(raw_class['soal'][i].value)
+      keterangan['benar']+=Number(raw_class['benar'][i].value)
+      keterangan['maksimum']+=Number(raw_class['maksimum'][i].value)
+
+      console.log(keterangan)
+
+      if(Number(raw_class['benar'][i].value)>Number(raw_class['soal'][i].value) || 
+      Number(raw_class['soal'][i].value)==0 || 
+      Number(raw_class['maksimum'][i].value)==0){
+        errorAlert();return false;
+      }
+
+      skor_per_soal = keterangan['maksimum']/keterangan['soal']
+      nilai_benar = skor_per_soal*keterangan['benar'];
+    }
+
+    return {benar : nilai_benar, total : keterangan['maksimum']}
+  }
+
+  function getSemiFixedInfo(nama){
+    document.getElementById("ket_"+nama).innerHTML = getSemiFixedScoreInfo(nama)['benar'] +"/"+getSemiFixedScoreInfo(nama)['total'];
+    document.getElementById("keterangan_"+nama).hidden=false;
+  }
+
+
+
   //Fungsi untuk mengolah nilai soal subyektif (uraian, bacaan)
 
   //Mengolah nilai
@@ -133,6 +174,8 @@
         }else if(keterangan['benar'][i].value=="" ^ keterangan['skor'][i].value==""){
           unfilledAlert();return false;
         }
+        //End kalau tidak pakai helper pecahan
+
       //Kalau pakai helper pecahan
       }else{
         var pecahan = {
@@ -173,8 +216,10 @@
           }else{
             unfilledAlert();return false;
           }
-      }   
+      } 
+      //End kalau tidak pakai helper pecahan
     }
+    //End iterasi
 
     //Memasukkan total skor untuk uraian dan bacaan
     for(var i=0;i<keterangan['skor'].length;i++){
@@ -243,7 +288,7 @@
   function getFactor(n){
     var helperFactor = [];
     n = parseInt(n);
-    for(var i=1;i<=Math.sqrt(n);i++){
+    for(var i=1;i<Math.sqrt(n);i++){
       if(n%i==0){
         if(n/i==i){
           helperFactor.push(i);
@@ -255,6 +300,8 @@
     }
     return helperFactor;
   }
+
+
 
   function logarithm(num, base=10){
     return Math.log(num)/Math.log(base);
@@ -271,13 +318,30 @@
   }
 
 
+  function getMinimum(arr, number){
+    var min = Math.abs(arr[0]-number), min_number = arr[0];
+    for(var i=1;i<arr.length;i++){
+        if(Math.abs(arr[i]-number)<min) {min=Math.abs(arr[i]-number);min_number=arr[i]}
+    }
+    return min_number;
+  }
+
+  function nearestFactor(arr, number){
+      for(var i=0;i<arr.length;i++){
+        if(arr[i]%number==0) return arr[i];
+      }
+      return false;
+  }
+
+
+  //Nilai bonus tipe 1 yang paling umum digunakan para guru
   function generateBonus(raw){
     var multiplier = parseInt(raw['total']/5);
     var poss1 = multiplier*5;
     var poss2 = (multiplier+1)*5;
     var bonus = 0;
-    //Bonus akan dijalankan jika total minimal 10
-    if(parseInt(raw['total'])>=10){
+    //Bonus akan dijalankan jika total minimal 5
+    if(parseInt(raw['total'])>=5){
       //Kalau lebih deket ke sebelumnya
       if(Math.abs(poss1-raw['total'])<Math.abs(poss2-raw['total'])){
         bonus = Number(poss1-raw['total']);
@@ -286,8 +350,6 @@
       else {
         bonus = Number(poss2-raw['total']);
       }
-
-      
     }
   
     return {score : raw['score']+bonus, total : raw['total']+bonus};
@@ -300,17 +362,18 @@
       var poss = (multiplier+1)*5;
       var bonus = 0;
       
-      //Bonus akan dijalankan jika total minimal 10
-      if(parseInt(raw['total'])%5!=0 && raw['total']>=10)
+      //Bonus akan dijalankan jika total minimal 5
+      if(parseInt(raw['total'])%5!=0 && raw['total']>=5)
       //Bonus selalu adalah bilangan setelahnya
       bonus = Number(poss-raw['total']);
       else if(parseInt(raw['total'])==9){
         bonus = Number(10-raw['total'])
       }
 
-
       return {score : raw['score']+bonus, total : raw['total']+bonus};
   }
+
+
 
     //Melakukan bonus spesial
     function generateBonusv3(raw){
@@ -449,13 +512,12 @@
     }
 
 
-
-    //Program mendapatkan kelipatan 5 terdekat dengan cara bonusing
+    //Selalu bonus kalau total skor kelebihan
     function generateBonusv5(raw){
       
       var bonus = 0;
       //Untuk mendapatkan kelipatan 5 terdekat
-      if(parseInt(raw['total'])>=10){
+      if(parseInt(raw['total'])>5){
         var multiplier = parseInt(raw['total']/5);
         var poss1 = multiplier*5;
         var poss2 = (multiplier+1)*5;
@@ -484,7 +546,7 @@
       return min_number;
     }
 
-    function nearestFactor(arr, number){
+    function anyFactor(arr, number){
         for(var i=0;i<arr.length;i++){
           if(arr[i]%number==0) return arr[i];
         }
@@ -511,6 +573,9 @@
       {tipe: "uraian",info : getScoreInfo("uraian"), status : "relative"}, 
       {tipe: "bacaan", info : getScoreInfo("bacaan"), status : "relative"},
       {tipe:"cocok", info:getFixedScoreInfo("cocok"), status:"fixed"},
+      {tipe : "cocokgambar", info:getFixedScoreInfo("cocokgambar"), status:"fixed"},
+      {tipe : "kelompok", info:getSemiFixedScoreInfo("kelompok"), status : "semifixed"},
+      {tipe : "jagan", info:getSemiFixedScoreInfo("jagan"), status : "semifixed"},
       {tipe:"bs", info:getFixedScoreInfo("bs"), status:"fixed"},
       {tipe:"tts", info:getFixedScoreInfo("tts"), status:"fixed"}
     ];
@@ -522,6 +587,9 @@
       var nilai;
       if(!average.checked){
           nilai = generateScoreObject(info);
+          for(var gso in generateScoreObject(info)){
+            console.log(gso);
+          }
       } else {
           var count_element = 0;
           nilai=[0,0,0,0,0,0]
@@ -546,10 +614,12 @@
           if(check_hidden(info[i]["tipe"])==false){
             if(info[i]["status"]=="fixed")
               getFixedInfo(info[i]["tipe"]);
+            else if(info[i]["status"]=="semifixed")
+              getSemiFixedInfo(info[i]["tipe"]);
             else
               getInfo(info[i]["tipe"]);
-            }else{
-              closeInfo(info[i]["tipe"]);
+          }else{
+            closeInfo(info[i]["tipe"]);
           }
         }
 
@@ -558,21 +628,31 @@
         for(var i=0;i<bonus_class.length;i++){
           bonus_class[i].innerHTML=Math.round(nilai[i+1]);
         }
-        var round_class = {floor : document.getElementsByClassName('floor'),
-        ceiling : document.getElementsByClassName('ceiling'),
-        onepoint : document.getElementsByClassName('onepoint')}
+
+        var round_class = {
+                            floor : document.getElementsByClassName('floor'),
+                            ceiling : document.getElementsByClassName('ceiling'),
+                            onepoint : document.getElementsByClassName('onepoint'),
+                            vthree : document.getElementsByClassName('vthree')
+                          };
+
+
+        
+
         for(var i=0;i<round_class['floor'].length;i++){
           round_class['floor'][i].innerHTML=Math.floor(nilai[i]);
           round_class['ceiling'][i].innerHTML=Math.ceil(nilai[i]);
+          round_class['vthree'][i].innerHTML=Math.round(nilai[i])+(nilai[i]-Math.floor(nilai[i]) == 0 ? 0 : 1);
           round_class['onepoint'][i].innerHTML=nilai[i].toFixed(1);
         }
-
-
+        
         addElement("twopoint", nilai[0].toFixed(2));
         addElement("threepoint", nilai[0].toFixed(3));
         openHidden("ket_nilai");
     }
   }
+  
+  
 
 
 
@@ -603,8 +683,9 @@
 
 
   function generate_text(name, id) {
+    //Form
       var form = 
-      `<div class="${name}_${id}">
+      `<div id="${name}_${id}">
       <div class="form-row my-2">
         <div class="col">
           <b>Nomor ${id} </b>
@@ -626,6 +707,7 @@
       onClick="useHelper(this.name, this.id)">Gunakan Helper Pecahan
       </button>
       </div>`
+      //Helper
       var helper = `<div class="helper_${name} ${name}_${id}" id="helper_div_${name}_${id}"
       style="display:none">
       <div class="form-inline">
@@ -644,18 +726,68 @@
       return {form : form, helper : helper};
   }
 
+ 
+  function generateGroup(name, id){
+      return `<div id="${name}_${id}">
+      <div class="form-row my-2">
+      <div class="col">
+        <b>Kelompok ${id} </b>
+      </div>
+    </div>
+      <div class="form-row">
+      <div class="col-sm-2">
+        <label for="soal_${name}">Jumlah kelompok jawaban</label>
+        <input type="number" class="form-control soal_${name}" value="" name ="${name}" min="1">
+      </div>
+      <div class="col-sm-2">
+        <label for="skor_${name}"><br>Skor maksimum</label>
+        <input type="number" class="form-control skor_${name}" value="1" name = "${name}" oninput="" min="1">
+      </div>
+      <div class="col-sm-2">
+        <label for="benar_${name}"><br>Jumlah benar</label>
+        <input type="number" class="form-control benar_${name}" value="" name ="${name}" oninput="" min="0">
+      </div>
+    </div>
+    </div>`
+  }
+
   var type_of_relative = ["bacaan", "uraian"]
+  var type_of_semifixed = ["kelompok", "jagan"]
   var pointer = {};
 
   $(document).ready(function(){
-      
+      //Untuk soal uraian
       for(var i=0;i<type_of_relative.length;i++){
         pointer[type_of_relative[i]]=1;
         var generator = generate_text(type_of_relative[i], pointer[type_of_relative[i]]);
         $('#score_'+type_of_relative[i]).append(generator.form).append(generator.helper);
         generate(type_of_relative[i], pointer[type_of_relative[i]]);
       }
+
+      
+      for(var i=0;i<type_of_semifixed.length;i++){
+        pointer[type_of_semifixed[i]]=1;
+        var semiFixedgenerator = generateGroup(type_of_semifixed[i], pointer[type_of_relative[i]]);
+        $('#score_'+type_of_semifixed[i]).append(semiFixedgenerator);
+        generateSemiFixed(type_of_semifixed[i], pointer[type_of_semifixed[i]]);
+      }
   })
+
+  function generateSemiFixed(name, pointer){
+    $("#add_"+name).click(function(){
+        pointer++;
+        console.log(name);
+        var generator = generateGroup(name, pointer);
+        $('#score_'+name).append(generator);
+        checkPointer(pointer, name);
+    })
+
+    $("#sub_"+name).click(function(){
+        $(`#${name}_${pointer}`).remove();
+        pointer--;
+        checkPointer(pointer, name);
+    })
+  }
 
   function generate(name, pointer){
     $("#add_"+name).click(function(){
@@ -666,7 +798,7 @@
     })
 
     $("#sub_"+name).click(function(){
-        $(`.${name}_${pointer}`).remove();
+        $(`#${name}_${pointer}`).remove();
         pointer--;
         checkPointer(pointer, name);
     })
@@ -674,9 +806,7 @@
 
 
   function checkPointer(pointer, name){
-    
       if(pointer>1){
-        console.log("Yok bisa yok :"+pointer)
         $('#sub_'+name).show();
       }
       if(pointer<=1){
@@ -686,16 +816,3 @@
 
 
 
-
-
-
-  /*function generate_score(name, id){
-    var target = ("score_"+name);
-    var number_of_element = $("#"+id).val();
-    //inner_target.innerHTML="";
-    for(var i=0;i<number_of_element;i++){
-      var form_text = generate_text(name, i+1).form;
-      var helper_text = generate_text(name, i+1).helper;
-      inner_target.innerHTML = inner_target.innerHTML+form_text+helper_text;
-    }
-  }*/

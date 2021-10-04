@@ -18,11 +18,19 @@
 <!--CSS Tambahan-->
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-dark">
+<body class='main-program'>
   <div id="header"></div>
-  <div class="main-element">
+  <!--Program Utama untuk Membandingkan nilai UN SMA-->
+  <div class="container-fluid ">
+    <div class="main-element">
+    </div>
+    
+    <footer class="d-flex justify-content-center disclaimer">
+      <h6 style="color:white"><danger>DISCLAIMER : </danger> UN SMA tidak menentukan kelulusan dan penerimaan PTN, sehingga aplikasi ini <br>
+      hanya digunakan untuk pembelajaran Pemrograman Web Dasar.</h6>
+    </footer>
   </div>
-    <!--Program Utama untuk Membandingkan nilai UN SMA-->
+  <!--End Program UN SMA-->
     
 
     <script src="src/general.js"></script>
@@ -48,14 +56,14 @@
         }
     }
 
-    function getElement(element, index){
+    /*function getElement(element, index){
         var manipulate = [];
         for(var i=0;i<element.length;i++){
             manipulate.push(document.getElementsByName(element[i])[index].value);
             console.log(manipulate[i]);
         }
         return manipulate;
-    }
+    }*/
 
     function noOutOfRange(element, lowRange, highRange){
         for(var i=0;i<element.length;i++){
@@ -88,11 +96,11 @@
 
         if(noOutOfRange(un1, 0, 100) && noOutOfRange(un2, 0, 100)){
             if(sum1>sum2){
-            alert("Nilai rata-rata UN "+sekolah1+" lebih tinggi dibandingkan "+sekolah2);
+              setText("Nilai rata-rata UN "+sekolah1+" lebih tinggi dibandingkan "+sekolah2);
             } else if (sum1<sum2){
-                alert("Nilai rata-rata UN "+sekolah2+" lebih tinggi dibandingkan "+sekolah1);
+              setText("Nilai rata-rata UN "+sekolah2+" lebih tinggi dibandingkan "+sekolah1);
             } else {
-                alert("Nilai rata-rata UN "+sekolah1+" sama dengan "+sekolah2);
+              setText("Nilai rata-rata UN "+sekolah1+" sama dengan "+sekolah2);
             }
         } else {
             alert("Mohon maaf, data yang anda masukkan tidak valid");
@@ -105,11 +113,10 @@
 
         }
     </script>
+    <script src="../src/general_alert.js"></script>
+    <script src="../src/general_school.js"></script>
      <script src="../src/jquery_implementation.js">
      </script>
-    <footer class="d-flex justify-content-center">
-      <h6 style="color:white"><danger>DISCLAIMER : </danger> UN SMA tidak menentukan kelulusan dan penerimaan PTN, sehingga aplikasi ini <br>
-      hanya digunakan untuk pembelajaran Pemrograman Web Dasar.</h6>
-    </footer>
+    
     </body>
     </html>

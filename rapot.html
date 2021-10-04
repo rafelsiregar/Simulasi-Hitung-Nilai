@@ -16,21 +16,35 @@
 <link href="https//db.onlinewebfonts.com/c/a97dc52b4b2059e5f04907cb7492af0b?family=Handel+Gothic" rel="stylesheet" type="text/css"/>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 <!--CSS Tambahan-->
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-dark">
+<body class="main-program">
   <div id="header"></div>
     <!--Program Utama untuk Membandingkan nilai ujian-->
-    <div class="main-element">
+    <div class="container-fluid main-element">
       <h1 class="ml-3 pt-2"> Hitung Nilai Akhir Semester (SD-SMA)</h1>
       <!--Program Utama-->
       <div class="row ml-1">
+        <!--Petunjuk Penggunaan-->
+        <div>
+          <b class="judul_petunjuk">Petunjuk penggunaan aplikasi : </b>
+          <ol class="petunjuk">
+            <li>Bobot nilai merupakan bobot untuk setiap elemen dalam bentuk satuan</li>
+          <li>Apabila bobot dalam bentuk persen, langsung tuliskan prosentase setiap elemen tanpa tanda persen (%).<br>
+          Pastikan jumlah bobot semua elemen bernilai '100'. Jika tidak, maka akan terjadi kesalahan pada perhitungan nilai.</li>
+          <li>Apabila guru tidak pernah memberikan nilai harian, guru dapat memasukkan nilai harian secara random, <br>
+            akan tetapi tidak diperbolehkan memasukkan nilai kurang dari 78 atau KKM (jika KKM lebih tinggi dari 78) </li>
+          <li>Pada poin 3, guru juga dapat memasukkan nilai keaktifan sebagai nilai harian.</li>
+          </ol>
+        </div>
+        <!--End Petunjuk Penggunaan-->
         <div class="col-8 d-block justify-content-left">
+
             <!--Info nilai harian-->
             <div id="tugas">
               <p id="text_tugas" class="head">Nilai Harian : </p>
               <div class="form-inline" id="bobot_total_tugas" hidden>
-                <label for="input_bobot_tugas" min="1" class="mr-sm-2">Bobot Tugas : </label>
+                <label for="input_bobot_tugas" min="1" class="mr-sm-2">Bobot Nilai Harian : </label>
                 <input type="number" value="" id="input_bobot_tugas" class="form-control input-sm mr-sm-2" name="tugas">
               </div>
                 <div id="info_tugas" class="mt-2"></div>
@@ -41,6 +55,8 @@
                 <button type="button" id="add_ulangan" class="btn btn-secondary mt-2"
                 >Tambah Ulangan</button>
             </div>
+            <!--End nilai harian-->
+
             <!--Info nilai UTS-->
           <div id="uts" class="d-block mt-2">
             <p id="text_uts" class="head">Nilai UTS : </p>
@@ -55,6 +71,9 @@
               </div>
             </div>
           </div>
+          <!--End nilai UTS-->
+
+
           <!--Info Nilai UAS-->
           <div id="uas" class="d-block mt-2">
             <p id="text_uas" class="head">Nilai UAS : </p>
@@ -69,15 +88,36 @@
               </div>
             </div>
           </div>
+          <!--End Nilai UAS-->
+
+          <!--Beri Bonus-->
           <div class="form-check-inline mt-2">
-            <label for="enable_bonus" class="form-check-label">
-              <input type="checkbox" class="form-check-input" id="enable_bonus" onclick="toggle(this.id)">
+            <label for="enable_addition" class="form-check-label">
+              <input type="checkbox" class="form-check-input" id="enable_addition">
               Berikan Bonus
             </label>
           </div>
+          <!--End Bonus-->
+
+          <!--Olah bonus-->
           <div id="bonus_nilai" class="d-block mt-2">
+            <!--Petunjuk Penggunaan-->
+            <div>
+              <b class="judul_petunjuk">Petunjuk penggunaan bonus : </b>
+              <ol class="petunjuk">
+                <li>Bonus tidak wajib diberikan oleh guru</li>
+                <li>Apabila ada bonus, beri 'centang' pada "Berikan bonus"</li>
+                <li>Tambahan merupakan nilai bonus karena siswa telah melakukan sesuatu</li>
+                <li>Apabila siswa melakukan sesuatu yang 'negatif', kolom 'Tambahan' juga berisi nilai negatif</li>
+                <li>Pengali merupakan seberapa banyak seorang siswa melakukan sesuatu tersebut</li>
+                <li>Jika guru memberikan nilai tambahan secara keseluruhan, kosongkan kolom 'pengali'. kolom
+                  <br> tersebut akan secara otomatis bernilai '1'.</li>
+              </ol>
+             
+            </div>
+            <!--End Petunjuk Penggunaan-->
             <p id="text_addit" class="head">Bonus Nilai : <br></p>
-            <div id="info_bonus"><!--Data Aspek Tambahan--></div>
+            <div id="info_addit"><!--Data Aspek Tambahan--></div>
               <!--Tombol untuk mengolah aspek tambahan-->
               <div class="form-group row">
                 <button type="button" id="add_addit" class="btn btn-secondary aspek col-sm-6" disabled>
@@ -87,8 +127,20 @@
                 </div>
                 <button type="button" id="add_element" hidden></button>
               </div>
+              <!--End tombol olah bonus-->
           </div>
+          <!--End olah bonus-->
+
+          <!--Button hitung-->
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-light mb-5 mt-4" onclick="count()">Hitung</button>
+          </div>
+          <!--End button hitung-->
+
         </div>
+        
+
+
         <!--Tempat Pengolahan Skor-->
         <div class="col-4 justify-content-start">
           <div id="ket_nilai" style="display:none">
@@ -120,14 +172,22 @@
             <div class="d-flex" id="div_harian" hidden>
               <p>Nilai rata-rata harian : </p><p id="elemen_harian" class="second secondary ml-2"></p>
             </div>
-          </div>
+            </div>
+            <!--End keterangan nilai-->
         </div>
         </div>
-        <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-light mb-5 mt-4" onclick="count()">Hitung</button>
-        </div>
+        <!--End olah skor-->
+
+        
     </div>
-    <script src="src/olahNilaiRapot.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+    <script src="src/general_alert.js"></script>
+    <script src="src/general_report.js"></script>
+    <script src="src/rapot.js"></script>
     <script src="src/jquery_implementation.js">
     </script>
     </body>

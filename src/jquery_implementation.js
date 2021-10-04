@@ -1,5 +1,11 @@
+var back =     ` <!--Navbar-->
+<button class=" btn btn-custom-light back-to-main" id="back" onclick="window.location.href='fitur.html'">
+  Kembali ke menu utama
+</button>
+<!--End Navbar-->`
+
 $(function(){
-    $("#header").load("./header_page.html");
+    $("#header").html(back);
 });
 
 $(document).ready(function(){
@@ -17,6 +23,12 @@ $(document).ready(function(){
   $(document).ready(function(){
     $("#show_one_round").click(function(){
       $("#pembulatan_satu").slideToggle();
+    });
+  });
+
+  $(document).ready(function(){
+    $("#show_v3_round").click(function(){
+      $("#pembulatan_v3").slideToggle();
     });
   });
 

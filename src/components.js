@@ -1,51 +1,56 @@
-
 var text_sekolah = 
     `<div class="form-inline">
         <label> Nama Sekolah : </label>
         <input type="text" name="school" value="" class="form-control ml-sm-2">
     </div>
     <div class="d-flex mt-2">
-        <p>Nilai rata-rata UN</p>
+        <p class="font-weight-bold">Nilai rata-rata UN</p>
     </div>`
 
     var report_text =
     `<div id="report" style="display:none">
+        <p class="font-weight-bold" id="result"></p>
         <p>Rata-rata UN <output id="sekolah1"></output> : <output id="avg1" class="avg"></output></p>
         <p>Rata-rata UN <output id="sekolah2"></output> : <output id="avg2" class="avg"></output></p>
         <p>Selisih : <output id="selisih"></output></p>
     </div>
     `
     
-    var button = `<div class="justify-content-center d-flex ml-sm-2">
-    <button type="button" 
-    class="btn btn-light mb-5 mt-4" onclick="compare()">Bandingkan</button>
-    </div>`
+    var button = `<div class="ml-sm-2 d-flex justify-content-center">
+                    <button type="button" class="btn btn-light mb-5 mt-4" onclick="compare()">Bandingkan</button>
+                    </div>`
 
 var elements =
-    `<h1 class="ml-3 mt-2" id="title"></h1>
+    `<h1 class="ml-3 mt-2 text-center font-weight-bold" id="title"></h1>
     <div class="main-process">
         <div id="info-jurusan" class="radio-info"></div>
         <div class="row ml-1 mt-5" id="main-row">
-            <div class="col-6 justify-content-center">
-                <div class="info-sekolah"></div>
-                <!--Informasi Nilai-->
-                <div class="info-jenjang"></div>
-            </div>
-            <div class="col-6 justify-content-center">
-                <!--Informasi Sekolah-->
-                <div class="info-sekolah"></div>
-                <!--Informasi Nilai-->
-                <div class="info-jenjang"></div>
-            </div>
+            <div class="col-md-8">
+                <div class="row">
+                        <div class="col-md-6 justify-content-center">
+                            <div class="info-sekolah"></div>
+                            <!--Informasi Nilai-->
+                            <div class="info-jenjang"></div>
+                        </div>
+                        <div class="col-md-6 justify-content-center">
+                            <!--Informasi Sekolah-->
+                            <div class="info-sekolah"></div>
+                            <!--Informasi Nilai-->
+                            <div class="info-jenjang"></div>
+                        </div>
+                    </div>
+                    <div id="main_button"></div>
+                </div>
+            <div class="col-md-4" id="report_info"></div>
         </div>
-        <div id="main_button"></div>
-        <div id="report_info"></div>
+        
+        
     </div>`
 
 
 function render(title){
     var text = {
-        'SD' : `<div class="form-group col-sm-4">
+        'SD' : `<div class="form-group">
         <label>Bahasa Indonesia : </label> 
         <input type="number" name="bind" value="" step="0.01" min="0" max="100" class="form-control">
         <label>Matematika : </label>
@@ -53,7 +58,7 @@ function render(title){
         <label>IPA : </label>
         <input type="number" name="ipa" value="" step="0.01" min="0" max="100" class="form-control">
         </div>`,
-        'SMP' : `<div class="form-group col-sm-4">
+        'SMP' : `<div class="form-group">
         <label>Bahasa Indonesia : </label> 
         <input type="number" name="bind" value="" step="0.01" min="0" max="100" class="form-control">
         <label>Bahasa Inggris : </label>
@@ -63,7 +68,7 @@ function render(title){
         <label>IPA : </label>
         <input type="number" name="ipa" value="" step="0.01" min="0" max="100" class="form-control">
         </div>`,
-        'SMA' : `<div class="form-group col-sm-4">
+        'SMA' : `<div class="form-group">
         <label>Bahasa Indonesia : </label> 
         <input type="number" name="bind" value="" step="0.01" min="0" max="100" class="form-control">
         <label>Bahasa Inggris : </label>
@@ -118,6 +123,10 @@ function render(title){
     $('#report_info').html(report_text);
     $('#main_button').html(button);
     
+}
+
+function setText(text){
+    $('#result').text(text);
 }
 
 

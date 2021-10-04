@@ -1,41 +1,17 @@
-//Mengolah Alert
-function errorAlert(){alert("Mohon maaf, ada kesalahan dalam input data");}
-function unfilledAlert(){alert("Mohon maaf, data harus diisi");}
-
-function openHidden(id) {document.getElementById(id).hidden=false};
-function closeHidden(id){document.getElementById(id).hidden=true};
-
-var input = document.getElementById("input_aspek");
-var aspect = document.getElementsByClassName("ket_aspek");
-var button = document.getElementById("add_addit"); 
-var confirm = document.getElementById("confirm");
-
-var pointer={tugas : 0, uts:0, uas:0, tambahan:0};
-var additional = [];
-
+//Pointer untuk masing-masing elemen
+var pointer=construct_pointer({tugas : 0, uts:0, uas:0, tambahan:0});
 
 //Jalankan JQuery
 $(document).ready(function(){
     $("#info_addit").append(generateAdditionalText("Kehadiran"),generateAdditionalText("Keaktifan"));
     
+
+    //Disable khusus kehadiran dan keaktifan
     var aspek = document.getElementsByClassName("aspek");
     for(var i=0;i<aspek.length;i++){
         aspek[i].disabled = true;
         aspek[i].value="";
     }
-    
-    $('#add_tugas').click(function(){
-        pointer['tugas']++;
-        console.log(pointer['tugas'])
-        $('#info_tugas').append(generateTaskText(pointer['tugas']));
-        checkPointer();
-    });
-
-    $('#sub_tugas').click(function(){
-    $('#info_tugas_'+(pointer['tugas'])).remove();
-        pointer['tugas']--;
-        checkPointer();
-    });    
 
     $("#add_uts").click(function(){
         pointer['uts']++;
@@ -63,59 +39,19 @@ $(document).ready(function(){
         checkPointer();
     });    
 
-    $('#add_addit').click(function(){
-
-        toggleButton();
-        
-        //Kalau udah menginput aspeknya
-        $("#input_aspek").keyup(function(e) {
-            if(e.keyCode == 13 && $(this).val()!=="") {
-                    e.preventDefault();
-                    $("#add_element").click() 
-            }
-        });
-    });
-
-    $("#add_element").click(function(){
-        var val = $("#input_aspek").val();
-        
-        //Generate Aspek
-        if(!additional.includes(val))
-        $('#info_addit').append(generateAdditionalText(val));
-        else alert("Aspek sudah ada");
-        console.log(generateAdditionalText(val));
-        //Mengembalikan button ke tempat semula
-        toggleButton();
-        $("#input_aspek").val("");
-    });
-
-    $('#enable_addition').click(function(){
-        var id = $(this).attr('id')
-        var aspek = document.getElementsByClassName("aspek");
-        if($(`#${id}`).is(':checked')){
-            for(var i=0;i<aspek.length;i++){
-                aspek[i].disabled = false; 
-            }
-        } else {
-            for(var i=0;i<aspek.length;i++){
-                aspek[i].disabled = true;
-                aspek[i].value="";
-            }
-            returnToDefault();
-        }
-    });
+    
 
 });
 
 function checkPointer(){
     if(pointer['tugas']>0){
         openHidden("bobot_total_tugas");
-        openHidden("text_tugas");openHidden("sub_tugas");
+        openHidden("sub_tugas");
     }
     
     if(pointer['tugas']<=0){
         closeHidden("bobot_total_tugas");
-        closeHidden("text_tugas");closeHidden("sub_tugas");
+        closeHidden("sub_tugas");
     }
 
     if(pointer['uts']>0){
@@ -139,10 +75,9 @@ function checkPointer(){
     }
 }
 
-
 //Coba pake jquery siapa tau bisa
 function generateTaskText(i){
-    return `<div class="data_tugas" id="info_tugas_${i}">
+    return `<div class="data_tugas" id="tugas_ke_${i}">
 <div class="form-row">
     <div class="form-group col-2">
     <label for="nilai_tugas_${i}">Nilai Tugas : </label>
@@ -178,7 +113,7 @@ function generateMidText(i){
     </div>
     <div class="form-row">
         <div class="form-group col-sm-4">
-                <label for="max_uts_${i}"> Nilai Maksimum (abaikan jika sama dengan 100) : </label>
+                <label for="max_uts_${i}"> Nilai Maksimum : </label>
             <input type="number" id="max_uts_${i}" class="maks_uts form-control"  min="1" step="0.5">
         </div>
     </div>
@@ -199,48 +134,12 @@ function generateFinalText(i){
     </div>
     <div class="form-row">
         <div class="form-group col-sm-4">
-            <label for="max_uas_${i}"> Nilai Maksimum (abaikan jika sama dengan 100) : </label>
+            <label for="max_uas_${i}"> Nilai Maksimum : </label>
             <input type="number" id="max_uas_${i}" class="maks_uas form-control" min="1" step="0.5">
         </div>
     </div>
 </div>`
 }
-
-function changeButton(){
-    button.className = button.className.replace(/col-sm-6/g, "col-sm-2");
-    confirm.style.display="inline";
-    button.innerHTML = "Batal Menambah Aspek";
-}
-
-
-function returnToDefault(){
-    button.className = button.className.replace(/col-sm-2/g, "col-sm-6");
-    confirm.style.display="none";
-    button.innerHTML = "Tambah Aspek";
-}
-
-function toggleButton(){
-    //Mengecilkan button
-    if(button.className.match(/col-sm-6/g)){
-        changeButton();
-    } else if(button.className.match(/col-sm-2/g)){
-        returnToDefault();
-    }
-}
-
-function removeElement(element, array){
-    var index = array.indexOf(element);
-    if (index !== -1) {
-    array.splice(index, 1);
-    }
-}
-
-
-function removeAspect(aspek){
-    $("#aspek_"+(aspek.toLowerCase().replace(" ", "_"))).remove();
-    removeElement(aspek, additional);
-}
-
 
 function generateAdditionalText(aspek){
     additional.push(aspek);
@@ -257,15 +156,13 @@ function generateAdditionalText(aspek){
              id="bobot_aspek_${aspek.toLowerCase().replace(" ", "_")}" placeholder="Bobot" min="1">
          </div>
          <div class="form-group col-sm-2">
-            <button type="button" id="remove_aspek_${aspek.toLowerCase().replace(" ", "_")}" 
-            class="btn btn-secondary aspek" onclick = "removeAspect('${aspek}')">
+            <button type="button" style="margin-top : 0px;" id="remove_aspek_${aspek.toLowerCase().replace(" ", "_")}" 
+            class="btn btn-secondary aspek" onclick = "removeAspect('${aspek}') style='margin-top:0;'" >
             Hapus Aspek </button>
          </div>
        </div>
        </div>`
 }
-
-
 
 
 function getMultiplier(name){
@@ -277,24 +174,29 @@ function getMultiplier(name){
     }
 }
 
-var gradeList = [
-    {grade:"A", min : 80, max:100},
-    {grade : "A-", min : 75, max: 80},
-    {grade : "A/B", min : 70, max : 75},
-    {grade : "B+", min : 65, max : 70},
-    {grade : "B", min : 60, max : 65},
-    {grade : "B-", min : 55, max : 60},
-    {grade : "B/C", min:50, max:55},
-    {grade:"C+", min:45, max:50},
-    {grade:"C", min:40, max:45},
-    {grade:"C/D", min:35, max:40},
-    {grade:"C-", min:30, max:35},
-    {grade:"D+", min:25, max :30},
-    {grade:"D", min:20, max:25},
-    {grade:"E", min:0, max:20}
-];
+function getGradeList(std, r1, r2, r3, r4) {
+    return [
+        {grade:"A", min : std, max:100},
+        {grade : "A-", min : std-r1, max: std},
+        {grade : "A/B", min : std-2*r1, max : std-r1},
+        {grade : "B+", min : std-2*r1-r2, max : std-2*r1},
+        {grade : "B", min : std-2*r1-2*r2, max : std-2*r1-r2},
+        {grade : "B-", min : std-2*r1-3*r2, max : std-2*r1-2*r2},
+        {grade : "B/C", min:std-2*r1-4*r2, max:std-2*r1-3*r2},
+        {grade:"C+", min:std-2*r1-4*r2-r3, max:std-2*r1-4*r2},
+        {grade:"C", min:std-2*r1-4*r2-2*r3, max:std-2*r1-4*r2-r3},
+        {grade:"C-", min:std-2*r1-4*r2-3*r3, max:std-2*r1-4*r2-2*r3},
+        {grade:"C/D", min:std-2*r1-4*r2-4*r3, max:std-2*r1-4*r2-3*r3},
+        {grade:"D+", min:std-2*r1-4*r2-4*r3-r4, max :std-2*r1-4*r2-4*r3},
+        {grade:"D", min:std-2*r1-4*r2-4*r3-2*r4, max:std-2*r1-4*r2-4*r3-r4},
+        {grade:"E", min:0, max:std-2*r1-4*r2-4*r3-2*r4}
+    ];
+} 
 
-function getGrade(num){
+
+function getGrade(num, thres, r1, r2, r3, r4){
+    gradeList = getGradeList(thres, r1, r2, r3, r4);
+    console.log(gradeList);
     if(Number(num)>=100) return "A";
     //Kalau tidak sama dengan 100
     else{
@@ -583,25 +485,37 @@ function countScore(){
             var bobot_tambahan=(100-bobot_total);
             nilai_akhir += bobot_tambahan;
         }else if(bobot_total>100){
-            //Konversi ke 100
+            var moreEnabled = document.getElementById('enable_more').checked;
+            console.log(moreEnabled)
+            //Kalau tidak diperbolehkan lebih dari 100, konversi ke 100
+            if(!moreEnabled)
             nilai_akhir = (nilai_akhir/bobot_total)*100;
+            //Kalau diperbolehkan
+            else{
+                nilai_akhir = nilai_akhir > 100 ? 100 : nilai_akhir;
+            }
         }
 
-        console.log(nilai_akhir);
         nilai_akhir = nilai_akhir+tambahan['tambahan']>100? 100 : nilai_akhir+tambahan['tambahan'];
 
-        console.log("Nilai :")
+        var amin;
 
-        console.log(nilai);
-        console.log("Bobot : ")
-        console.log(bobot);
+        if(document.getElementById('a-minimum').value==""){
+            amin = 80;
+        }else{
+            amin = Number(document.getElementById('a-minimum').value);
+        }
 
-        console.log("Nilai akhir : ")
+        var ranges = document.getElementsByClassName('range');
+        var rangeList = [];
+        for(var i=0;i<ranges.length;i++){
+            if(ranges[i].value=="") rangeList.push(5);
+            else rangeList.push(ranges[i].value);
+        }
         
-        console.log(nilai_akhir);
-        
+
         document.getElementById("nilai_utama").innerHTML = "<b>"+nilai_akhir.toFixed(2)+"</b>";
-        document.getElementById("nilai_huruf").innerHTML = "<b>("+getGrade(nilai_akhir)+")</b>";
+        document.getElementById("nilai_huruf").innerHTML = "<b>("+getGrade(nilai_akhir, amin, rangeList[0], rangeList[1], rangeList[2], rangeList[3])+")</b>";
         document.getElementById("ket_nilai").style.display="block";
         open("tugas", nilai["tugas"], bobot["tugas"]);open("uts", nilai["uts"],bobot["uts"]);
         open("uas", nilai["uas"], bobot["uas"]);
