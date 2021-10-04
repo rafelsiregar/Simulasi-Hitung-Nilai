@@ -7,48 +7,32 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <!--Bootstrap Utama-->
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!--JQuery-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!--Bootstrap JS-->
-<script src="../src/bootstrap.min.js"></script>
-<!--Font Tambahan-->
-<link href="https//db.onlinewebfonts.com/c/a97dc52b4b2059e5f04907cb7492af0b?family=Handel+Gothic" rel="stylesheet" type="text/css"/>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+<script src="src/bootstrap.min.js"></script>
 <!--CSS Tambahan-->
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-dark">   
   <div id="header"></div>
     <!--Program Utama untuk Membandingkan nilai UN SMP-->
-    <div>
-        <h1 class="ml-3 mt-2"> Bandingkan Nilai UN SMP</h1>
-        <div class="row ml-1 mt-5 d-flex justify-content-center">
-            <div class="col-6 justify-content-center">
-                 <div class="info_sekolah"></div>
-                 <!--Informasi Nilai-->
-                <div class="info_smp"></div>
-            </div>
-            <div class="col-6 justify-content-center">
-                <!--Informasi Sekolah-->
-                <div class="info_sekolah"></div>
-                 <!--Informasi Nilai-->
-                 <div class="info_smp"></div>
-             </div>
-            </div>
-        </div>
-        <div id="main_button"></div>
-        <div id="report_info"></div>
+    <div class="main-element">
     </div>
 
-    <script src="../src/general.js"></script>
-    <script src="../src/jquery_implementation.js">
+    <script src="src/general.js"></script>
+    <script src="src/jquery_implementation.js">
     </script>
-    <script src="../src/htmltaglist.js"></script>
+    <script src="src/components.js"></script>
     <script>
+
+    render('SMP');    
     
 
     function compare() {
+
+        
 
         
         var sekolah1 = document.getElementsByName("school")[0].value;

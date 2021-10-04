@@ -16,36 +16,20 @@
 <link href="https//db.onlinewebfonts.com/c/a97dc52b4b2059e5f04907cb7492af0b?family=Handel+Gothic" rel="stylesheet" type="text/css"/>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 <!--CSS Tambahan-->
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-dark">
   <div id="header"></div>
+  <div class="main-element">
+  </div>
     <!--Program Utama untuk Membandingkan nilai UN SMA-->
-    <div>
-        <h1 class="ml-3 pt-2"> Bandingkan Nilai UN SMA</h1>
-        <div id="info_jurusan"></div>
-          <div class="row ml-1 mt-5 d-flex justify-content-center">
-            <div class="col-6 justify-content-center">
-              <!--Informasi sekolah-->
-                <div class="info_sekolah"></div>
-                <!--Informasi Nilai-->
-                <div class="info_sma"></div>
-            </div>
-            <div class="col-6 justify-content-center">
-                <!--Informasi Sekolah-->
-                <div class="info_sekolah"></div>
-                <!--Informasi Nilai-->
-                <div class="info_sma"></div>
-            </div>
-            </div>
-          </div>
-          <div id="main_button"></div>
-          <div id="report_info"></div>
-    </div>
+    
 
-    <script src="../src/general.js"></script>
-    <script src="../src/htmltaglist.js"></script>
+    <script src="src/general.js"></script>
+    <script src="src/components.js"></script>
     <script>
+
+      render('SMA');
 
     function set_jurusan(jurusan){
       var l = document.getElementsByClassName('pil1').length;

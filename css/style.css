@@ -1,7 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Ubuntu:wght@400;500;700&display=swap');
 
-
-div {
+a {
     color: white;
+}
+
+.bi.contact {
+    height: 2vh;
+    width : 2vw;
+}
+
+.bi.social-media {
+    height: 3vh;
+    width: 3vw;
+}
+
+.list-unstyled * {
+    margin-bottom: 0.5vh;
+}
+
+.navbar-custom {
+    background-color: rgb(44, 0, 0);
+}
+
+.nav-item {
+    font-family: 'Ubuntu';
+    font-size: 15pt;
+}
+
+.navbar-brand {
+    color : white;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20pt;
 }
 
 .dropdown:hover>.dropdown-menu {
@@ -10,9 +39,120 @@ div {
 
 
 
+
+
 .dropdown-toggle::after {
     content: none;
 }
+
+div.main-element {
+    color: white;
+    padding: 1vh 1vw;
+    justify-content: center;
+}
+
+section {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#home {
+    padding : 5vh 5vw;
+    height: 100vh;
+    background-size:cover;
+    background: url('/assets/img/background1.jpg') rgba(43, 0, 0, 0.8);
+    background-blend-mode: multiply;
+    color : white;
+    background-attachment: fixed;
+}
+
+#home .container {
+    margin: 25vh auto;
+}
+
+.big-title {
+    font-size : 3rem;
+    margin: 3vh 0;
+}
+
+.description-1 {
+    font-size: 1.75rem;
+}
+
+.description-2 {
+    font-size : 1.25rem;
+}
+
+.maroon {
+    width: 100%;
+    
+    background-color: maroon;
+    color: white;
+    
+}
+
+.container h1 {
+    font-weight: bold;
+}
+
+.feature-box, .helping-box {
+    border-radius: 10px;
+    
+    margin:  15px;
+
+}
+
+.feature-box {
+    padding: 20px;
+}
+
+
+.feature-box h3 {
+    font-weight: bold;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16pt;
+    color : white;
+}
+
+.feature-box p {
+    font-size: 10pt;
+}
+
+#help {
+    height: 50vh;
+    background-size:cover;
+    background: url('/assets/img/background2.jpg') rgba(72,0,0,0.9);
+    background-blend-mode: multiply;
+    color : white;
+    background-attachment: fixed;
+    
+}
+
+.helping-box {
+    font-family: 'Montserrat', sans-serif;
+    color : white;
+    padding: 2vh 1vw 1vh;
+    cursor: pointer;
+
+    
+}
+
+.helping-box * {
+    margin-top: 1vh;
+}
+
+.icon-layanan {
+    height: 60%;
+    width: 50%;
+}
+
+
+
+
+
+
+
+
+
 
 
 .caption{
@@ -33,6 +173,9 @@ div {
     font-size: 10pt;
 }
 
+.radio-info {
+    margin: 3vh auto;
+}
 
 h1 {
     font-size : 30pt;
@@ -46,6 +189,40 @@ h1 {
     justify-content: center;
 }
 
+.btn-custom-maroon {
+    background-color : maroon;
+    color : white;
+    font-size: 1rem !important;
+    padding: 1vh 1vw;
+    border-radius: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.btn-send-email {
+    background-color : rgb(49, 0, 0);
+    color : white;
+    padding: 1vh 1vw;
+    border-radius: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.form-email {
+    width : 25vw;border-radius: 10px;background-color: rgb(79, 79, 79);border: none;
+    color:rgb(49, 15, 15) !important;
+}
+
+.form-email::placeholder {
+    color: rgb(201, 201, 201);
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+.btn-custom-maroon:hover {
+    background-color : rgb(60, 0, 0);
+    color : white;
+}
+
 
 .split {
   height: 60%;
@@ -57,10 +234,10 @@ h1 {
   position: fixed;
 }
 
-body {
-    background-color: black;
+/*body {
+    background-color: rgb(100, 0, 0);
     overflow-x: hidden;
-}
+}*/
 
 .primary {
     justify-content: left;
