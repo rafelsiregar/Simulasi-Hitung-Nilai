@@ -14,7 +14,7 @@
   $(document).ready(function(){
     $('#add_another_aspect').click(function(){
       $('#another_aspect').slideToggle();
-      $('#add_another_aspect').toggleClass('btn-light btn-secondary');
+      $('#add_another_aspect').toggleClass('btn-custom-light');
         $('#add_another_aspect').text( $('#add_another_aspect').text() == "Tampilkan jenis soal lainnya" ? 
         "Sembunyikan jenis soal lainnya" : "Tampilkan jenis soal lainnya");
     })
@@ -694,12 +694,12 @@
       <div class="form-row ${name}_${id}">
         <div class="col-sm-3">
           <label for="skor_${name}_${id}">Skor yang diperoleh</label>
-          <input type="number" id="skor_${name}_${id}"class="benar_${name} form-control" 
+          <input type="number" id="skor_${name}_${id}"class="benar_${name} soal form-control"
           value="" step="0.5" min="0">
         </div>
         <div class="col-sm-3">
           <label for="benar_${name}_${id}">Bobot</label>
-          <input type="number" id="benar_${name}_${id}"class="skor_${name} form-control" 
+          <input type="number" id="benar_${name}_${id}"class="skor_${name} soal form-control" 
           value="" step="1" min="1">
         </div>
       </div>
@@ -737,15 +737,15 @@
       <div class="form-row">
       <div class="col-sm-2">
         <label for="soal_${name}">Jumlah kelompok jawaban</label>
-        <input type="number" class="form-control soal_${name}" value="" name ="${name}" min="1">
+        <input type="number" class="form-control soal_${name} soal" value="" name ="${name}" min="1">
       </div>
       <div class="col-sm-2">
         <label for="skor_${name}"><br>Skor maksimum</label>
-        <input type="number" class="form-control skor_${name}" value="1" name = "${name}" oninput="" min="1">
+        <input type="number" class="form-control skor_${name} soal" value="1" name = "${name}" oninput="" min="1">
       </div>
       <div class="col-sm-2">
         <label for="benar_${name}"><br>Jumlah benar</label>
-        <input type="number" class="form-control benar_${name}" value="" name ="${name}" oninput="" min="0">
+        <input type="number" class="form-control benar_${name} soal" value="" name ="${name}" oninput="" min="0">
       </div>
     </div>
     </div>`
@@ -813,6 +813,43 @@
         $('#sub_'+name).hide();
       }
   }
+
+  $('#img-multiple-choice').click(function(){
+    var render = `<!--Petunjuk Penggunaan Pilgan-->
+    <ol class="petunjuk"><br>
+    <li>
+    "Skor maksimum" merupakan skor maksimum untuk keseluruhan jawaban apabila benar semua. 
+      <br> Jika menghendaki menggunakan skor per soal, anda dapat memasukkan hasil kali jumlah soal dengan nilai per soal,
+      <br> semisal ada 20 soal dengan skor masing-masing soal sebesar 2, maka anda dapat memasukkan angka 20 x 2 = 40 
+      <br>pada kolom "Skor maksimum".
+    </li>
+    <li>Untuk pilihan ganda, skor default untuk 1 soal adalah 1 poin. Anda dapat mengubahnya dengan cara seperti pada poin 1.
+    </li>
+    <li>Jumlah benar boleh tidak merupakan bilangan bulat jika satu soal dapat memiliki lebih dari satu jawaban dan
+      <br> siswa hanya memilih sebagian pilihan yang benar/siswa memilih pilihan yang benar tetapi juga ada pilihan yang salah. </li>
+    <li>Jumlah soal dan skor maksimum harus merupakan bilangan bulat.</li>
+    </ol>
+    <!--End Petunjuk Pilgan-->`
+
+    $('#modal-pop-up').modal('show');
+    $('.modal-body').html(render);
+
+  })
+
+  $('#img-multiple-answers').click(function(){
+    var render=`<!--Petunjuk penggunaan-->
+    <b class="judul_petunjuk">Petunjuk penggunaan : </b>
+    <ol class="petunjuk">
+      <li>Jika jumlah soal dengan jawaban ganda cukup banyak, anda dapat menggunakan pilihan ganda dengan mengisi jumlah benar
+        <br>dengan bilangan pecahan (jika terdapat soal yang sebagian benar). </li>
+      <li>Jumlah kelompok jawaban menunjukkan jumlah pilihan yang benar. </li>
+      <li>Abaikan jumlah pilihan yang benar </li>
+    </ol>
+    <!--End petunjuk penggunaan-->`
+
+    $('#modal-pop-up').modal('show');
+    $('.modal-body').html(render);
+  })
 
 
 

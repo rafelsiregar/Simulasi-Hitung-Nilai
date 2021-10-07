@@ -24,15 +24,18 @@
     <div class="container-fluid">
       <!--Program Utama-->
       <div class="main-element">
-      <h1> Hitung Nilai Akhir Kuliah</h1>
+      <h1 class="text-center"> Hitung Nilai Akhir Kuliah</h1>
       <div class="row ml-1">
         <div class="col-md-6 d-col-sm justify-content-left">
           <!--Tugas-->
             <div id="tugas">
-              <p id="text_tugas" class="head">Nilai Tugas </p>
+              <div class="head">
+                <p id="text_tugas" class="head">Nilai Tugas </p>
+              </div>
+              
               <div class="form-inline" id="bobot_total_tugas" hidden>
                 <label for="input_bobot_tugas" min="1" class="mr-sm-2">Bobot Total : </label>
-                <input type="number" value="" id="input_bobot_tugas" class="form-control input-sm mr-sm-2" name="tugas">
+                <input type="number" value="" id="input_bobot_tugas" class="form-control input-sm mr-sm-2 nilai" name="tugas">
               </div>
                 <div id="info_tugas" class="mt-2"></div>
                 <button type="button" id="sub_tugas" class="mt-2 btn btn-custom-light" hidden> Kurangi Tugas</button>
@@ -43,23 +46,17 @@
             <!--End Tugas-->
 
           <!--UTS-->
-          <p id="text_uts" class="head">Nilai UTS </p>
-          <div id="uts" class="d-block mt-2">
-            <!--Petunjuk Penggunaan-->
-          <div>
-            <b class="judul_petunjuk">Petunjuk perhitungan nilai UTS : </b>
-            <p class="petunjuk">1. Jika ada UTS, anda dapat mengeklik "Tambah soal" sebanyak jumlah soal dan memberikan nilai untuk setiap soal</p>
-            <p class="petunjuk">2. "Nilai maksimum" hanya diisi apabila total skor untuk soal tersebut tidak sama dengan 100, 
-              <br>akan tetapi jika diisi '100' tidak akan menyebabkan error. </p>
-            <p class="petunjuk">3. Penghitungan UTS dengan format penilaian total dapat dilakukan dengan menggunakan menu <a href="tugas.html">Nilai Tugas</a><br>
-            dan hasilnya di-copas ke kolom "Nilai Soal" pada "Nomor 1" UTS dengan "Bobot Soal" sesuai Bobot UTS dan <br>
-            "Nilai Maksimum" boleh dikosongkan. </p>
+          <div class="d-inline-flex head">
+            <p id="text_uts">Nilai UTS </p>
+            <img src="assets/img/240px-Question_mark_white_icon.svg.png" class="img" id="img-uts">
           </div>
-          <!--End Petunjuk Penggunaan-->
+          
+          <div id="uts" class="d-block mt-2">
+            
             
             <div class="form-inline" id="bobot_total_uts" hidden>
               <label for="input_bobot_uts" min="1" class="mr-sm-2">Bobot Total : </label>
-              <input type="number" value="" id="input_bobot_uts" class="form-control input-sm mr-sm-2" name = "uts">
+              <input type="number" value="" id="input_bobot_uts" class="form-control input-sm mr-sm-2 nilai" name = "uts">
             </div>
             <div id="info_uts"></div>
             <button type="button" id="sub_uts" class="btn btn-custom-light" hidden> 
@@ -72,24 +69,16 @@
           
           <div id="uas" class="d-block mt-2">
             <!--Petunjuk Penggunaan-->
-          <div>
-            <p id="text_uas" class="head">Nilai UAS <br></p>
-            <b class="judul_petunjuk">Petunjuk perhitungan nilai UAS : </b>
-            <ol class="petunjuk">
-              <li>Jika ada UAS, anda dapat mengeklik "Tambah soal" sebanyak jumlah soal dan memberikan nilai untuk setiap soal</li>
-              <li>"Nilai maksimum" hanya diisi apabila total skor untuk soal tersebut tidak sama dengan 100, 
-                <br>akan tetapi jika diisi '100' tidak akan menyebabkan error. </li>
-              <li>Penghitungan UAS dengan format penilaian total dapat dilakukan dengan menggunakan menu <a href="tugas.html">Nilai Tugas</a><br>
-                dan hasilnya di-copas ke kolom "Nilai Soal" pada "Nomor 1" UAS dengan "Bobot Soal" sesuai Bobot UAS dan <br>
-                "Nilai Maksimum" boleh dikosongkan. </li>
-            </ol>
+          <div class="d-inline-flex head">
+            <p id="text_uas">Nilai UAS <br></p>
+            <img src="assets/img/240px-Question_mark_white_icon.svg.png" class="img" id="img-uas">
             
           </div>
           <!--End Petunjuk Penggunaan-->
             
             <div class="form-inline" id="bobot_total_uas" hidden>
               <label for="input_bobot_uas" min="1" class="mr-sm-2">Bobot Total : </label>
-              <input type="number" value="" id="input_bobot_uas" class="form-control input-sm mr-sm-2" name = "uas">
+              <input type="number" value="" id="input_bobot_uas" class="form-control input-sm mr-sm-2 nilai" name = "uas">
             </div>
             <div id="info_uas"></div>
             <button type="button" id="sub_uas" class="mt-2 btn btn-custom-light" hidden> 
@@ -137,52 +126,46 @@
           <form>
             <!--Petunjuk Penggunaan-->
             <div>
-              <b class="judul_petunjuk">Petunjuk penggunaan range nilai : </b>
-              <ol class="petunjuk"><li>Jika tidak diisi, maka nilai A akan diatur pada 80 dan 
-                untuk setiap rentang memiliki interval 5 
-                <br>(sesuai standar Ilmu Komputer UGM)</li>
-                <li>Anda dapat mengatur rentang nilai sebagai berikut :
-                  <ul class="petunjuk">
-                    <li>Range nilai A : berisi rentang untuk nilai A, A-, dan A/B</li>
-                    <li>Range nilai B : berisi rentang untuk nilai B+, B, B-, dan B/C</li>
-                    <li>Range nilai C : berisi rentang untuk nilai C+, C, C-, dan C/D</li>
-                    <li>Range nilai D : berisi rentang untuk nilai D+, dan D</li>
-                  </ul>
-                </li>
-              </ol>
+              <div class="d-inline-flex head">
+                <p>Range Nilai</p>
+                <img src="assets/img/240px-Question_mark_white_icon.svg.png" class="img" id="img-range">
+              </div>
+              
+              
             </div>
             <!--End Petunjuk Penggunaan-->
             <div class="form-group row">
               <label for="a-minimum" class="col-sm-3 col-form-label">Nilai A minimal</label>
               <div class="col-sm-3">
-                <input type="number" class="form-control" id="a-minimum">
+                <input type="number" class="form-control nilai" id="a-minimum">
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Range kelompok A</label>
               <div class="col-sm-3">
-                <input type="number" class="form-control range">
+                <input type="number" class="form-control range nilai">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Range kelompok B</label>
+              <div class="col-sm-3">
+                <input type="number" class="form-control range nilai">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label  class="col-sm-3 col-form-label">Range kelompok C</label>
+              <div class="col-sm-3">
+                <input type="number" class="form-control range nilai">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Range kelompok D</label>
+              <div class="col-sm-3">
+                <input type="number" class="form-control range nilai">
               </div>
             </div>
           </form>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Range kelompok B</label>
-            <div class="col-sm-3">
-              <input type="number" class="form-control range">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label  class="col-sm-3 col-form-label">Range kelompok C</label>
-            <div class="col-sm-3">
-              <input type="number" class="form-control range">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Range kelompok D</label>
-            <div class="col-sm-3">
-              <input type="number" class="form-control range">
-            </div>
-          </div>
+          
           <!--End Berikan Nilai-->
 
             <!--Button Hitung Skor-->
@@ -231,6 +214,11 @@
       </div>
       <!--End Program Utama-->
     </div>
+
+    <div id="pop-up"></div>
+
+
+
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
     <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>

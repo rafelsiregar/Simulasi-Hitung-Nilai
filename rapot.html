@@ -22,37 +22,33 @@
   <div id="header"></div>
     <!--Program Utama untuk Membandingkan nilai ujian-->
     <div class="container-fluid main-element">
-      <h1 class="ml-3 pt-2"> Hitung Nilai Akhir Semester (SD-SMA)</h1>
+      <div class="d-flex justify-content-center">
+        <h1 class="ml-3"> Hitung Nilai Akhir Semester (SD-SMA)</h1>   
+      </div>
+      
+      
       <!--Program Utama-->
       <div class="row ml-1">
-        <!--Petunjuk Penggunaan-->
-        <div>
-          <b class="judul_petunjuk">Petunjuk penggunaan aplikasi : </b>
-          <ol class="petunjuk">
-            <li>Bobot nilai merupakan bobot untuk setiap elemen dalam bentuk satuan</li>
-          <li>Apabila bobot dalam bentuk persen, langsung tuliskan prosentase setiap elemen tanpa tanda persen (%).<br>
-          Pastikan jumlah bobot semua elemen bernilai '100'. Jika tidak, maka akan terjadi kesalahan pada perhitungan nilai.</li>
-          <li>Apabila guru tidak pernah memberikan nilai harian, guru dapat memasukkan nilai harian secara random, <br>
-            akan tetapi tidak diperbolehkan memasukkan nilai kurang dari 78 atau KKM (jika KKM lebih tinggi dari 78) </li>
-          <li>Pada poin 3, guru juga dapat memasukkan nilai keaktifan sebagai nilai harian.</li>
-          </ol>
-        </div>
-        <!--End Petunjuk Penggunaan-->
-        <div class="col-8 d-block justify-content-left">
-
+        
+        <div class="col-6 d-block justify-content-start">
             <!--Info nilai harian-->
+            <div class="d-flex">
+              <img src="assets/img/240px-Question_mark_white_icon.svg.png" id="img-general" class="img"/>
+              <p>Petunjuk Penggunaan Aplikasi</p>
+            </div>
+            
             <div id="tugas">
               <p id="text_tugas" class="head">Nilai Harian : </p>
               <div class="form-inline" id="bobot_total_tugas" hidden>
                 <label for="input_bobot_tugas" min="1" class="mr-sm-2">Bobot Nilai Harian : </label>
-                <input type="number" value="" id="input_bobot_tugas" class="form-control input-sm mr-sm-2" name="tugas">
+                <input type="number" value="" id="input_bobot_tugas" class="form-control input-sm mr-sm-2 nilai" name="tugas">
               </div>
                 <div id="info_tugas" class="mt-2"></div>
-                <button type="button" id="sub_tugas" class="mt-2 btn btn-light" hidden> Kurangi Tugas</button>
-                <button type="button" id="add_tugas" class="btn btn-secondary mt-2">Tambah Tugas</button>
+                <button type="button" id="sub_tugas" class="mt-2 btn btn-custom-light" hidden> Kurangi Tugas</button>
+                <button type="button" id="add_tugas" class="btn btn-custom-add mt-2">Tambah Tugas</button>
                 <div id="info_ulangan" class="mt-2"></div>
-                <button type="button" id="sub_ulangan" class="mt-2 btn btn-light" hidden> Kurangi Ulangan</button>
-                <button type="button" id="add_ulangan" class="btn btn-secondary mt-2"
+                <button type="button" id="sub_ulangan" class="mt-2 btn btn-custom-light" hidden> Kurangi Ulangan</button>
+                <button type="button" id="add_ulangan" class="btn btn-custom-add mt-2"
                 >Tambah Ulangan</button>
             </div>
             <!--End nilai harian-->
@@ -61,13 +57,13 @@
           <div id="uts" class="d-block mt-2">
             <p id="text_uts" class="head">Nilai UTS : </p>
             <div class="form-row">
-              <div class="form-group col-sm-3">
+              <div class="form-group mr-2">
                 <label for="bobot_total_uts" min="1" class="mr-sm-3">Bobot UTS : </label>
-                <input type="number" value="" id="input_bobot_uts" class="form-control input-sm mr-sm-2" name = "uts">
+                <input type="number" value="" id="input_bobot_uts" class="form-control input-sm mr-sm-2 nilai" name = "uts">
               </div>  
-              <div class="form-group col-sm-3">
+              <div class="form-group mr-2">
                 <label for="input_nilai_uts" min="1" class="mr-sm-3">Nilai UTS : </label>
-                <input type="number" value="" id="input_nilai_uts" class="form-control input-sm mr-sm-2" name = "uts">
+                <input type="number" value="" id="input_nilai_uts" class="form-control input-sm mr-sm-2 nilai" name = "uts">
               </div>
             </div>
           </div>
@@ -78,13 +74,13 @@
           <div id="uas" class="d-block mt-2">
             <p id="text_uas" class="head">Nilai UAS : </p>
             <div class="form-row">
-              <div class="form-group col-sm-3">
+              <div class="form-group mr-2">
                 <label for="bobot_total_uts" min="1" class="mr-sm-2">Bobot UAS : </label>
-                <input type="number" value="" id="input_bobot_uas" class="form-control input-sm mr-sm-2" name = "uas">
+                <input type="number" value="" id="input_bobot_uas" class="form-control input-sm mr-sm-2 nilai" name = "uas">
               </div>  
-              <div class="form-group col-sm-3">
+              <div class="form-group mr-2">
                 <label for="input_nilai_uas" min="1" class="mr-sm-2">Nilai UAS : </label>
-                <input type="number" value="" id="input_nilai_uas" class="form-control input-sm mr-sm-2" name = "uas">
+                <input type="number" value="" id="input_nilai_uas" class="form-control input-sm mr-sm-2 nilai" name = "uas">
               </div>
             </div>
           </div>
@@ -101,26 +97,11 @@
 
           <!--Olah bonus-->
           <div id="bonus_nilai" class="d-block mt-2">
-            <!--Petunjuk Penggunaan-->
-            <div>
-              <b class="judul_petunjuk">Petunjuk penggunaan bonus : </b>
-              <ol class="petunjuk">
-                <li>Bonus tidak wajib diberikan oleh guru</li>
-                <li>Apabila ada bonus, beri 'centang' pada "Berikan bonus"</li>
-                <li>Tambahan merupakan nilai bonus karena siswa telah melakukan sesuatu</li>
-                <li>Apabila siswa melakukan sesuatu yang 'negatif', kolom 'Tambahan' juga berisi nilai negatif</li>
-                <li>Pengali merupakan seberapa banyak seorang siswa melakukan sesuatu tersebut</li>
-                <li>Jika guru memberikan nilai tambahan secara keseluruhan, kosongkan kolom 'pengali'. kolom
-                  <br> tersebut akan secara otomatis bernilai '1'.</li>
-              </ol>
-             
-            </div>
-            <!--End Petunjuk Penggunaan-->
             <p id="text_addit" class="head">Bonus Nilai : <br></p>
             <div id="info_addit"><!--Data Aspek Tambahan--></div>
               <!--Tombol untuk mengolah aspek tambahan-->
               <div class="form-group row">
-                <button type="button" id="add_addit" class="btn btn-secondary aspek col-sm-6" disabled>
+                <button type="button" id="add_addit" class="btn btn-custom-add aspek col-sm-6" disabled>
                   Tambah Bonus</button>
                 <div id="confirm" class="col-sm-4" style="display:none;">
                   <input type="text" class="form-control" id="input_aspek" value="">
@@ -133,7 +114,7 @@
 
           <!--Button hitung-->
           <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-light mb-5 mt-4" onclick="count()">Hitung</button>
+            <button type="button" class="btn btn-custom-light mb-5 mt-4" onclick="count()">Hitung</button>
           </div>
           <!--End button hitung-->
 
@@ -142,7 +123,7 @@
 
 
         <!--Tempat Pengolahan Skor-->
-        <div class="col-4 justify-content-start">
+        <div class="col-6 justify-content-start">
           <div id="ket_nilai" style="display:none">
             <p id="ket_total">Nilai yang diperoleh : <br></p>
             <!--Keterangan Nilai-->
@@ -177,9 +158,13 @@
         </div>
         </div>
         <!--End olah skor-->
-
-        
     </div>
+
+    <div id="pop-up"></div>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
     <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
@@ -189,6 +174,14 @@
     <script src="src/general_report.js"></script>
     <script src="src/rapot.js"></script>
     <script src="src/jquery_implementation.js">
+    </script>
+    
+    <script>
+      // All animations will take exactly 500ms
+      var scroll = new SmoothScroll('a[href*="#"]', {
+              speed: 200,
+              speedAsDuration: true
+          });
     </script>
     </body>
     </html>

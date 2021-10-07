@@ -4,6 +4,67 @@ var pointer=construct_pointer({tugas : 0, uts:0, uas:0, tambahan:0});
 //Jalankan JQuery
 $(document).ready(function(){
     $("#info_addit").append(generateAdditionalText("Kehadiran"),generateAdditionalText("Keaktifan"));
+
+    $('#img-range').click(function(){
+        $('#pop-up').html(base_pop_up);
+        var render = `<ol class="petunjuk">
+        <li>Jika tidak diisi, maka nilai A akan diatur pada 80 dan 
+        untuk setiap rentang memiliki interval 5 <br>(sesuai standar Ilmu Komputer UGM)</li>
+        <li>Anda dapat mengatur rentang nilai sebagai berikut :
+          <ul class="petunjuk">
+            <li>Range nilai A : berisi rentang untuk nilai A, A-, dan A/B<br>
+            <b>(Contohnya nilai A- adalah pada rentang 75-80 dan A/B adalah pada rentang 70-75, maka ditulis \'5\')</b> </li>
+            <li>Range nilai B : berisi rentang untuk nilai B+, B, B-, dan B/C</li>
+            <li>Range nilai C : berisi rentang untuk nilai C+, C, C-, dan C/D</li>
+            <li>Range nilai D : berisi rentang untuk nilai D+ dan D</li>
+          </ul>
+        </li>
+      </ol>`
+      
+      $('#modal-pop-up').modal('show');
+      $('#modal-title').text("Petunjuk Penggunaan Range Nilai");
+      $('.modal-body').html(render);
+    })
+
+    $('#img-uts').click(function(){
+        $('#pop-up').html(base_pop_up);
+        var render = `<ol class="petunjuk">
+        <li >Jika ada UTS, anda dapat mengeklik "Tambah soal" sebanyak jumlah soal dan memberikan nilai untuk setiap soal</li>
+        <li>"Nilai maksimum" hanya diisi apabila total skor untuk soal tersebut tidak sama dengan 100, 
+          <br>akan tetapi jika diisi '100' tidak akan menyebabkan error. </li>
+        <li>Penghitungan UTS dengan format penilaian total dapat dilakukan dengan menggunakan menu <a href="tugas.html" class="a-tugas">Nilai Tugas</a>
+        dan hasilnya di-copas ke kolom "Nilai Soal" pada "Nomor 1" UTS dengan "Bobot Soal" sesuai Bobot UTS dan <br>
+        "Nilai Maksimum" boleh dikosongkan. </li>
+          </ol>`
+
+        $('#modal-pop-up').modal('show');
+        $('#modal-title').text("Petunjuk perhitungan nilai UTS");
+        $('.modal-body').html(render);
+    })
+
+    $('#img-uas').click(function(){
+        $('#pop-up').html(base_pop_up);
+        var render = `
+        <ol class="petunjuk">
+          <li>Jika ada UAS, anda dapat mengeklik "Tambah soal" sebanyak jumlah soal dan memberikan nilai untuk setiap soal</li>
+          <li>"Nilai maksimum" hanya diisi apabila total skor untuk soal tersebut tidak sama dengan 100, 
+            <br>akan tetapi jika diisi '100' tidak akan menyebabkan error. </li>
+          <li>Penghitungan UAS dengan format penilaian total dapat dilakukan dengan menggunakan menu <a href="tugas.html" class="a-tugas">Nilai Tugas</a><br>
+            dan hasilnya di-copas ke kolom "Nilai Soal" pada "Nomor 1" UAS dengan "Bobot Soal" sesuai Bobot UAS dan <br>
+            "Nilai Maksimum" boleh dikosongkan. </li>
+        </ol>`
+
+        $('#modal-pop-up').modal('show');
+        $('#modal-title').text("Petunjuk perhitungan nilai UAS");
+        $('.modal-body').html(render);
+    })
+
+
+    
+
+    
+
+
     
 
     //Disable khusus kehadiran dan keaktifan
@@ -73,6 +134,7 @@ function checkPointer(){
         closeHidden("bobot_total_uas");
         closeHidden("sub_uas");
     }
+
 }
 
 //Coba pake jquery siapa tau bisa
@@ -81,12 +143,12 @@ function generateTaskText(i){
 <div class="form-row">
     <div class="form-group col-2">
     <label for="nilai_tugas_${i}">Nilai Tugas : </label>
-        <input type="number" id="nilai_tugas_${i}" class="nilai_tugas form-control input-sm" value=""
+        <input type="number" id="nilai_tugas_${i}" class="nilai_tugas form-control input-sm nilai-small" value=""
         placeholder="Nilai" min="1" step="0.5">
     </div>
     <div class="form-group col-2">
         <label for="bobot_tugas_${i}">Bobot Tugas : </label>
-        <input type="number" id="bobot_tugas_${i}" class="bobot_tugas form-control input-sm" value=""
+        <input type="number" id="bobot_tugas_${i}" class="bobot_tugas form-control input-sm nilai-small" value=""
         placeholder="Bobot" min="1" step="0.5">
     </div>
     <div class="form-check-inline col-2 mt-1">
@@ -104,17 +166,17 @@ function generateMidText(i){
     <div class="form-row">
         <div class="form-group col-sm-3">
             <input type="number" id="nilai_uts_${i}" 
-            class="nilai_uts form-control" placeholder="Nilai Soal" min="1" step="0.01" value="">
+            class="nilai-small nilai_uts form-control" placeholder="Nilai Soal" min="1" step="0.01" value="">
         </div>
         <div class="form-group col-sm-3">
-            <input type="number" id="bobot_uts_${i}" class="bobot_uts form-control" value=""
+            <input type="number" id="bobot_uts_${i}" class="nilai-small bobot_uts form-control" value=""
             placeholder="Bobot Soal" min="1" step="0.1">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-sm-4">
                 <label for="max_uts_${i}"> Nilai Maksimum : </label>
-            <input type="number" id="max_uts_${i}" class="maks_uts form-control"  min="1" step="0.5">
+            <input type="number" id="max_uts_${i}" class="nilai-small maks_uts form-control"  min="1" step="0.5">
         </div>
     </div>
 </div>`
@@ -125,44 +187,23 @@ function generateFinalText(i){
     <p>Nomor ${i}</p>
     <div class="form-row">
         <div class="form-group col-sm-3">
-            <input type="number" id="nilai_uas_${i}" class="nilai_uas form-control" placeholder="Nilai Soal" value="" min="1" step=
+            <input type="number" id="nilai_uas_${i}" class="nilai-small nilai_uas form-control" placeholder="Nilai Soal" value="" min="1" step=
             "0.01">
         </div>
         <div class="form-group col-sm-3">
-            <input type="number" id="bobot_uas_${i}" class="bobot_uas form-control" value="" placeholder="Bobot Soal" min="1" step="0.1">
+            <input type="number" id="bobot_uas_${i}" class="nilai-small bobot_uas form-control" value="" placeholder="Bobot Soal" min="1" step="0.1">
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-sm-4">
             <label for="max_uas_${i}"> Nilai Maksimum : </label>
-            <input type="number" id="max_uas_${i}" class="maks_uas form-control" min="1" step="0.5">
+            <input type="number" id="max_uas_${i}" class="nilai-small maks_uas form-control" min="1" step="0.5">
         </div>
     </div>
 </div>`
 }
 
-function generateAdditionalText(aspek){
-    additional.push(aspek);
-    console.log(aspek.toLowerCase().replace(" ", "_"))
-    return `<div class="data_addit" id="aspek_${aspek.toLowerCase().replace(" ", "_")}">
-         <p> ${aspek} </p>
-         <div class="form-row data_aspek">
-         <div class="form-group col-sm-2">
-             <input type="number" class="aspek nilai_aspek form-control input-sm"
-             id= "nilai_aspek_${aspek.toLowerCase().replace(" ", "_")}"  placeholder="Nilai" min="1">
-         </div>
-         <div class="form-group col-sm-2">
-             <input type="number" class="aspek bobot_aspek form-control input-sm"  
-             id="bobot_aspek_${aspek.toLowerCase().replace(" ", "_")}" placeholder="Bobot" min="1">
-         </div>
-         <div class="form-group col-sm-2">
-            <button type="button" style="margin-top : 0px;" id="remove_aspek_${aspek.toLowerCase().replace(" ", "_")}" 
-            class="btn btn-secondary aspek" onclick = "removeAspect('${aspek}') style='margin-top:0;'" >
-            Hapus Aspek </button>
-         </div>
-       </div>
-       </div>`
-}
+
 
 
 function getMultiplier(name){
@@ -195,7 +236,7 @@ function getGradeList(std, r1, r2, r3, r4) {
 
 
 function getGrade(num, thres, r1, r2, r3, r4){
-    gradeList = getGradeList(thres, r1, r2, r3, r4);
+    gradeList = getGradeList(thres, Number(r1), Number(r2), Number(r3), Number(r4));
     console.log(gradeList);
     if(Number(num)>=100) return "A";
     //Kalau tidak sama dengan 100
@@ -255,7 +296,7 @@ function countScore(){
     uas : uas['nilai'].length==0,
     tambahan : ((tambahan['check'].checked==false)||tambahan['nilai'].length==0)};
 
-    console.log(hiddenStatus['tugas'] +" "+ hiddenStatus['uts'] +" "+ hiddenStatus['uas'] +" "+ hiddenStatus['tambahan'])
+    //console.log(hiddenStatus['tugas'] +" "+ hiddenStatus['uts'] +" "+ hiddenStatus['uas'] +" "+ hiddenStatus['tambahan'])
 
     if(hiddenStatus['tugas'] && hiddenStatus['uts'] && hiddenStatus['uas'] && hiddenStatus['tambahan']){
         alert("Harap menginput minimal salah satu elemen nilai");
@@ -335,7 +376,7 @@ function countScore(){
         //Kalau ada UTS
         if(uts["max"]!=null){
 
-            console.log("Debug : "+uts['nilai'][i].value!="" && uts["max"][i].value!="" && uts["bobot"][i].value=="")
+           // console.log("Debug : "+uts['nilai'][i].value!="" && uts["max"][i].value!="" && uts["bobot"][i].value=="")
             //Kalau soal yang gak wajib dikerjakan, masukin ke nilai tapi gak usah pake bobot
             if(uts["nilai"][i].value!="" && uts["bobot"][i].value==""){
                 if(uts['max'][i].value=="")
@@ -448,9 +489,9 @@ function countScore(){
             //Untuk cek datanya kosong apa nggak
             for(var i in nilai){
                 //Kalau bobotnya ada yang 0
-                console.log(i+" "+hiddenStatus[i]+" "+bobot[i])
+                //console.log(i+" "+hiddenStatus[i]+" "+bobot[i])
                 if(i!="tambahan" && hiddenStatus[i]==false && bobot[i]==0){
-                    console.log('Error disini')
+                    //console.log('Error disini')
                     unfilledAlert();
                     return;
                 }
@@ -464,7 +505,7 @@ function countScore(){
                 if(i!="tambahan" && bobot[i]!=100 && bobot[i]!=0){
                     //Kalau ada salah satu yang nol
                     if(getMultiplier(i)==0){
-                        console.log('Error lagi')
+                        //console.log('Error lagi')
                         unfilledAlert();
                         return;
                     }
@@ -486,7 +527,7 @@ function countScore(){
             nilai_akhir += bobot_tambahan;
         }else if(bobot_total>100){
             var moreEnabled = document.getElementById('enable_more').checked;
-            console.log(moreEnabled)
+            //console.log(moreEnabled)
             //Kalau tidak diperbolehkan lebih dari 100, konversi ke 100
             if(!moreEnabled)
             nilai_akhir = (nilai_akhir/bobot_total)*100;
@@ -562,5 +603,8 @@ function countScore(){
             }        
         }
     }
+
+
+
 
 

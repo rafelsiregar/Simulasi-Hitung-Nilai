@@ -45,12 +45,53 @@ function checkPointer(){
 
 
 
+
+$('#img-bonus').click(function(){
+    $('#pop-up').html(base_pop_up);
+    var render = `<ol class="petunjuk">
+      <li>Bonus tidak wajib diberikan oleh guru</li>
+      <li>Apabila ada bonus, beri 'centang' pada "Berikan bonus"</li>
+      <li>Tambahan merupakan nilai bonus karena siswa telah melakukan sesuatu</li>
+      <li>Apabila siswa melakukan sesuatu yang 'negatif', kolom 'Tambahan' juga berisi nilai negatif</li>
+      <li>Pengali merupakan seberapa banyak seorang siswa melakukan sesuatu tersebut</li>
+      <li>Jika guru memberikan nilai tambahan secara keseluruhan, kosongkan kolom 'pengali'. kolom
+        <br> tersebut akan secara otomatis bernilai '1'.</li>
+    </ol>`
+
+
+    $('#modal-pop-up').modal('show');
+    $('#modal-title').text("Petunjuk penggunaan bonus");
+    $('.modal-body').html(render);
+
+})
+
+$('#img-general').click(function(){
+    $('#pop-up').html(base_pop_up);
+    var render = `<ol class="petunjuk">
+      <li>Bobot nilai merupakan bobot untuk setiap elemen dalam bentuk satuan</li>
+    <li>Apabila bobot dalam bentuk persen, langsung tuliskan prosentase setiap elemen tanpa tanda persen (%).<br>
+    Pastikan jumlah bobot semua elemen bernilai '100'. Jika tidak, maka akan terjadi kesalahan pada perhitungan nilai.</li>
+    <li>Apabila guru tidak pernah memberikan nilai harian, guru dapat memasukkan nilai harian secara random, <br>
+      akan tetapi tidak diperbolehkan memasukkan nilai kurang dari 78 atau KKM (jika KKM lebih tinggi dari 78) </li>
+    <li>Pada poin 3, guru juga dapat memasukkan nilai keaktifan sebagai nilai harian.</li>
+    </ol>`
+
+    $('#modal-pop-up').modal('show');
+    $('#modal-title').text("Petunjuk penggunaan aplikasi");
+    $('.modal-body').html(render);
+
+   
+})
+
+
+
+
 function generateTaskText(i){
     return `<div class="data_tugas" id="tugas_ke_${i}">
 <div class="form-row">
     <div class="form-group col-3">
         <label for="nilai_tugas_${i}">Tugas ke-${i}</label>
-        <input type="number" id="nilai_tugas_${i}" class="nilai_tugas form-control" value="" placeholder="Nilai Tugas" min="1" step="0.5">
+        <input type="number" id="nilai_tugas_${i}" class="nilai nilai_tugas form-control" value="" placeholder="Nilai Tugas" min="1" step="0.5">
     </div>
 </div>
 </div>`
@@ -63,7 +104,7 @@ function generateTestText(i){
     <div class="form-row">
         <div class="form-group col-sm-3">
             <input type="number" id="nilai_ulangan_${i}" 
-            class="nilai_ulangan form-control" value="" placeholder="Nilai Soal" min="1" step="0.01">
+            class="nilai_ulangan form-control nilai" value="" placeholder="Nilai Ulangan" min="1" step="0.01">
         </div>
     </div>
 </div>`
@@ -187,28 +228,7 @@ function open(id, value){
     document.getElementById("elemen_"+id).innerHTML=value;
 }
 
-function generateAdditionalText(aspek){
-    additional.push(aspek);
-    console.log(aspek.toLowerCase().replace(" ", "_"))
-    return `<div class="data_addit" id="aspek_${aspek.toLowerCase().replace(" ", "_")}">
-         <p> ${aspek} </p>
-         <div class="form-row data_aspek">
-         <div class="form-group col-sm-2">
-             <input type="number" class="aspek nilai_aspek form-control input-sm"
-             id= "nilai_aspek_${aspek.toLowerCase().replace(" ", "_")}"  placeholder="Tambahan" min="1">
-         </div>
-         <div class="form-group col-sm-2">
-             <input type="number" class="aspek bobot_aspek form-control input-sm"  
-             id="bobot_aspek_${aspek.toLowerCase().replace(" ", "_")}" placeholder="Pengali" min="1">
-         </div>
-         <div class="form-group col-sm-2">
-            <button type="button" id="remove_aspek_${aspek.toLowerCase().replace(" ", "_")}" 
-            class="btn btn-secondary aspek" onclick = "removeAspect('${aspek}')">
-            Hapus Aspek </button>
-         </div>
-       </div>
-       </div>`
-}
+
 
 
 
