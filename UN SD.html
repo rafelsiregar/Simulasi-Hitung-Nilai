@@ -27,11 +27,20 @@
                 hanya digunakan untuk pembelajaran Pemrograman Web Dasar.</h6>
         </footer>
     </div>
-    
+    <div id="pop-up"></div>
     <script src="src/components.js"></script>
     <script>
 
     render('SD'); 
+
+    function noOutOfRange(element){
+    for(var i=0;i<element.length;i++){
+        if(element[i]<0 || element[i]>100 || element[i]==""){
+            return false;
+        }
+    }
+    return true;
+    }   
 
 
     function compare() {

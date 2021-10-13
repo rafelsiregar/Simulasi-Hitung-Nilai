@@ -48,17 +48,6 @@ $(document).ready(function(){
 
 });
 
-function checkPointer(){
-    if(pointer['state']>2){
-        hs.openHidden("bobot_total_state");
-        hs.openHidden("text_state");hs.openHidden("sub_state");
-    }
-    
-    if(pointer['state']<=2){
-        closeHidden("bobot_total_state");
-        closeHidden("text_state");closeHidden("sub_state");
-    }
-}
 
 
 //Coba pake jquery siapa tau bisa
@@ -87,9 +76,14 @@ function generateStateText(state){
 
 
 function generateStateInfo(state){
-    return `<div class="d-flex" id="info_${state.toLowerCase().replaceAll(" ", "_")}" hidden>
-    <p>Jumlah ${state} : </p><output id="jumlah_${state.toLowerCase().replaceAll(" ", "_")}" class="secondary ml-2"></output>
-    </div>`
+    return `<div id="info_${state.toLowerCase().replaceAll(" ", "_")}">
+    <div class="d-inline-flex">
+        <p class="info mr-2">Jumlah ${state} : </p>
+        <p id="jumlah_${state.toLowerCase().replaceAll(" ", "_")}" class="ket mr-2"></p>
+        <p id="ket_${state.toLowerCase().replaceAll(" ", "_")}" class="ket"></p>
+    </div>
+    </div>
+    `
 }
 
 
@@ -202,7 +196,10 @@ if(jumlah_state[empty_pointer].value==""){
     
     $('#nilai_utama_multicase').text(nilai_akhir);
     $('#elemen_state').text(nilai_akhir_ratusan.toFixed(2));
-    for(var i=0;i<state_list.length;i++) $('#jumlah_'+state_list[i]).text(jumlah_state[i].value+" (Nilai : "+jumlah_state[i].value*bobot_state[i].value+")");
+    for(var i=0;i<state_list.length;i++) {
+        $('#jumlah_'+state_list[i]).text(`${jumlah_state[i].value}`);
+        $('#ket_'+state_list[i]).text(`(Nilai : ${jumlah_state[i].value * bobot_state[i].value})`);
+    }
 
     console.log(nilai_akhir);
 

@@ -19,14 +19,8 @@ function getElement(element, index){
     return manipulate;
 }
 
-function noOutOfRange(element, lowRange, highRange){
-    for(var i=0;i<element.length;i++){
-        if(element[i]<0 || element[i]>100 || element[i]==""){
-            return false;
-        }
-    }
-    return true;
-}
+
+
 
 
 

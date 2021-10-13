@@ -22,7 +22,7 @@
         <div class="main-element">
         </div>
     </div>
-
+    <div id="pop-up"></div>
     <script src="../src/general_alert.js"></script>
     <script src="../src/general_school.js"></script>
     <script src="src/jquery_implementation.js">
@@ -31,6 +31,15 @@
     <script>
 
     render('SMP');    
+
+    function noOutOfRange(){
+            for(var i=0;i<element.length;i++){
+                if(element[i]<0 || element[i]>100 || element[i]==""){
+                    return false;
+                }
+            }
+            return true;
+        }
     
 
     function compare() {

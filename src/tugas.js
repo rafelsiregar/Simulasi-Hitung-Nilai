@@ -151,8 +151,11 @@
 
   //Mengolah nilai
   function getScoreInfo(nama){
+    //Kalau uraian ke-hidden alias gak ada uraian
     if(check_hidden(nama)) return 0;
+    //Kalau semuanya gak keisi
     if(AllUnfilled(nama)) {unfilledAlert();return false;}
+    
     var keterangan = {
       helper : document.getElementsByClassName("helper_"+nama),
       benar : document.getElementsByClassName("benar_"+nama),
@@ -161,70 +164,71 @@
     var benar = 0, skor=0;
     //Memasukkan total skor untuk uraian dan bacaan
     for(var i=0;i<keterangan['benar'].length;i++){
-      //Kalau tidak pakai helper pecahan
-      if(keterangan['helper'][i].style.display=="none"){
-        //Kalau ada isinya semua
-        if(keterangan['benar'][i].value!="" && keterangan['skor'][i].value!=""){
-          if(Number(keterangan['benar'][i]).value>Number(keterangan['skor'][i].value)){
-            errorAlert();return false;
-          }else{
-            benar = benar + Number(keterangan['benar'][i].value);
-          }
-        //Kalau salah satu ada isinya
-        }else if(keterangan['benar'][i].value=="" ^ keterangan['skor'][i].value==""){
-          unfilledAlert();return false;
-        }
-        //End kalau tidak pakai helper pecahan
-
-      //Kalau pakai helper pecahan
-      }else{
-        var pecahan = {
-          pembilang : document.getElementsByClassName("pembilang_"+nama),
-          penyebut : document.getElementsByClassName("penyebut_"+nama)
-        }
-          //Kalau pecahannya dipakai
-          if(pecahan["pembilang"][i].value!="" && pecahan["penyebut"][i].value!=""){
-
-
-            //Kalau tidak valid
-            if(pecahan["pembilang"][i].value>=pecahan["penyebut"][i].value){
+      var element = $('#element_'+nama+'_'+(i+1));
+      //Kalau gak di-hide
+      if(element.is(':visible')){
+        //Kalau tidak pakai helper pecahan
+        if(keterangan['helper'][i].style.display=="none"){
+          //Kalau ada isinya semua
+          if(keterangan['benar'][i].value!="" && keterangan['skor'][i].value!=""){
+            if(Number(keterangan['benar'][i]).value>Number(keterangan['skor'][i].value)){
               errorAlert();
-              break;
+              return false;
+            }else{
+              benar = benar + Number(keterangan['benar'][i].value);
+              skor = skor + Number(keterangan['skor'][i].value);
             }
-
-
-            //Kalau nilai utama ada isinya
-            else if(keterangan['benar'][i].value!="" && keterangan['skor'][i].value!=""){
-              //Kalau nggak valid
-              if(Number(keterangan['benar'][i]).value>Number(keterangan['skor'][i].value)){
-                errorAlert();return false;
-
-              //Kalau valid
-              }else{
-                benar = benar+Number(keterangan['benar'][i].value)+
-              Number(pecahan["pembilang"][i].value/pecahan["penyebut"][i].value);
-              } 
-
-
-            //Kalau salah satu gak diisi
-            }else if(keterangan['benar'][i].value=="" ^ keterangan['skor'][i].value==""){
-              unfilledAlert();return false;
-            }
-
-
-          //Kalau pakai helper pecahan tapi gak diisi
-          }else{
-            unfilledAlert();return false;
+          //Kalau salah satu ada isinya
+          }else if(keterangan['benar'][i].value=="" ^ keterangan['skor'][i].value==""){
+            unfilledAlert();
+            return false;
           }
-      } 
-      //End kalau tidak pakai helper pecahan
+          //End kalau tidak pakai helper pecahan
+        //Kalau pakai helper pecahan
+        }else{
+          var pecahan = {
+            pembilang : document.getElementsByClassName("pembilang_"+nama),
+            penyebut : document.getElementsByClassName("penyebut_"+nama)
+          }
+            //Kalau pecahannya dipakai
+            if(pecahan["pembilang"][i].value!="" && pecahan["penyebut"][i].value!=""){
+
+
+              //Kalau tidak valid
+              if(pecahan["pembilang"][i].value>=pecahan["penyebut"][i].value){
+                errorAlert();
+                break;
+              }
+
+
+              //Kalau nilai utama ada isinya
+              else if(keterangan['benar'][i].value!="" && keterangan['skor'][i].value!=""){
+                //Kalau nggak valid
+                if(Number(keterangan['benar'][i]).value>Number(keterangan['skor'][i].value)){
+                  errorAlert();
+                  return false;
+                //Kalau valid
+                }else{
+                  benar = benar+Number(keterangan['benar'][i].value)+Number(pecahan["pembilang"][i].value/pecahan["penyebut"][i].value);
+                }
+              //Kalau salah satu gak diisi
+              }else if(keterangan['benar'][i].value=="" ^ keterangan['skor'][i].value==""){
+                unfilledAlert();return false;
+              }
+            //Kalau pakai helper pecahan tapi gak diisi
+            }
+        } 
+      //End kalau pakai helper pecahan
+      }
     }
     //End iterasi
 
-    //Memasukkan total skor untuk uraian dan bacaan
-    for(var i=0;i<keterangan['skor'].length;i++){
-      skor = skor + Number(keterangan['skor'][i].value);
+    //Mengecek total skor
+    if(skor<=0){
+      errorAlert();return false;
     }
+
+    
     //Mengeluarkan total skor
     return {benar : benar, total:skor};
   }
@@ -623,7 +627,7 @@
           }
         }
 
-        addElement("nilai_utama", "<b>"+Math.round(nilai[0])+"</b>");
+        addElement("nilai_utama", Math.round(nilai[0]));
         var bonus_class = document.getElementsByClassName('bonus');
         for(var i=0;i<bonus_class.length;i++){
           bonus_class[i].innerHTML=Math.round(nilai[i+1]);
@@ -633,7 +637,9 @@
                             floor : document.getElementsByClassName('floor'),
                             ceiling : document.getElementsByClassName('ceiling'),
                             onepoint : document.getElementsByClassName('onepoint'),
-                            vthree : document.getElementsByClassName('vthree')
+                            vthree : document.getElementsByClassName('vthree'),
+                            twopoint : document.getElementsByClassName('twopoint'),
+                            threepoint : document.getElementsByClassName('threepoint')
                           };
 
 
@@ -644,10 +650,11 @@
           round_class['ceiling'][i].innerHTML=Math.ceil(nilai[i]);
           round_class['vthree'][i].innerHTML=Math.round(nilai[i])+(nilai[i]-Math.floor(nilai[i]) == 0 ? 0 : 1);
           round_class['onepoint'][i].innerHTML=nilai[i].toFixed(1);
+          round_class["twopoint"][i].innerHTML = nilai[i].toFixed(2);
+          round_class["threepoint"][i].innerHTML =  nilai[i].toFixed(3);
         }
         
-        addElement("twopoint", nilai[0].toFixed(2));
-        addElement("threepoint", nilai[0].toFixed(3));
+        
         openHidden("ket_nilai");
     }
   }
@@ -668,7 +675,7 @@
 
   function useHelper(name, id){
     var modified_id = id.replace("helper_"+name+"_", "");
-
+    console.log(modified_id);
 
     $('#helper_div_'+name+"_"+modified_id).slideToggle(function(){
       var mainsent = "Helper Pecahan"
@@ -680,50 +687,80 @@
     });
   }
 
+  function toggleElement(name, id){
+    var modified_id = id.replace("hide_"+name+"_", "");
+    $('#element_'+name+'_'+modified_id).slideToggle(function(){
+      if($(this).is(":visible")){
+        $('#hide_'+name+"_"+modified_id).text("Sembunyikan Nomor "+modified_id);
+      }else{
+        $('#hide_'+name+"_"+modified_id).text("Tampilkan Nomor "+modified_id);
+      }
+    });
+
+    
+  }
+
 
 
   function generate_text(name, id) {
     //Form
       var form = 
       `<div id="${name}_${id}">
-      <div class="form-row my-2">
-        <div class="col">
+      <div class="d-flex justify-content-start my-2">
           <b>Nomor ${id} </b>
+      </div>
+      <!--Program Utama-->
+      <div id="element_${name}_${id}">
+
+      <!--Row Utama-->
+        <div class="form-row ${name}_${id}">
+          <div class="col-sm-4">
+            <label for="skor_${name}_${id}">Skor yang diperoleh</label>
+            <input type="number" id="skor_${name}_${id}"class="benar_${name} soal form-control"
+            value="" step="0.5" min="0">
+          </div>
+          <div class="col-sm-4">
+            <label for="benar_${name}_${id}">Bobot</label>
+            <input type="number" id="benar_${name}_${id}"class="skor_${name} soal form-control" 
+            value="" step="1" min="1">
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-custom-light" id = "helper_${name}_${id}" name="${name}" style="margin-top:30px;"
+          onClick="useHelper(this.name, this.id)">Gunakan Helper Pecahan
+          </button>
         </div>
       </div>
-      <div class="form-row ${name}_${id}">
-        <div class="col-sm-3">
-          <label for="skor_${name}_${id}">Skor yang diperoleh</label>
-          <input type="number" id="skor_${name}_${id}"class="benar_${name} soal form-control"
-          value="" step="0.5" min="0">
-        </div>
-        <div class="col-sm-3">
-          <label for="benar_${name}_${id}">Bobot</label>
-          <input type="number" id="benar_${name}_${id}"class="skor_${name} soal form-control" 
-          value="" step="1" min="1">
+      <!--End Row Utama-->
+
+      <!--Helper Pecahan-->
+      <div class="helper_${name} ${name}_${id}" id="helper_div_${name}_${id}" style="display:none">
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="pembilang_${id}" class="label-helper">Pembilang :</label>
+            <input type="number" id="pembilang_${id}" class= "pembilang_${name} form-control input-sm nilai" 
+            value="" step="1">
+          </div>
+          <div class="form-group">
+            <label for="penyebut_${id}" style="font-size:10pt" class="label-helper">Penyebut :</label>
+            <input type="number" id="penyebut_${id}" class= "penyebut_${name} form-control input-sm nilai" value="" step="1">
+          </div>
         </div>
       </div>
-      <button class="btn btn-light" id = "helper_${name}_${id}" name="${name}"
-      onClick="useHelper(this.name, this.id)">Gunakan Helper Pecahan
-      </button>
+      <!--End Helper Pecahan-->
+
+      </div>
+      <!--End Program Utama-->
+
+      <!--Melakukan hiding pada elemen-->
+      <button class="btn btn-custom-light" id = "hide_${name}_${id}" name="${name}"
+      onClick="toggleElement(this.name, this.id)">Sembunyikan Nomor ${id} </button>
+      <!--End hiding--> 
+        
+      
       </div>`
       //Helper
-      var helper = `<div class="helper_${name} ${name}_${id}" id="helper_div_${name}_${id}"
-      style="display:none">
-      <div class="form-inline">
-        <div class="form-group">
-        <label for="pembilang_${id}" class="label-helper">Pembilang :</label>
-        <input type="number" id="pembilang_${id}" class= "pembilang_${name} form-control input-sm" 
-        value="" step="1">
-        </div>
-        <div class="form-group">
-        <label for="penyebut_${id}" style="font-size:10pt" class="label-helper">Penyebut :</label>
-        <input type="number" id="penyebut_${id}" class= "penyebut_${name} form-control input-sm" value="" step="1">
-        </div>
-        </div>
-      </div>`
 
-      return {form : form, helper : helper};
+      return form;
   }
 
  
@@ -731,20 +768,20 @@
       return `<div id="${name}_${id}">
       <div class="form-row my-2">
       <div class="col">
-        <b>Kelompok ${id} </b>
+        <b>Kelompok/Nomor ${id} </b>
       </div>
     </div>
       <div class="form-row">
-      <div class="col-sm-2">
+      <div class="col-lg-4">
         <label for="soal_${name}">Jumlah kelompok jawaban</label>
         <input type="number" class="form-control soal_${name} soal" value="" name ="${name}" min="1">
       </div>
-      <div class="col-sm-2">
-        <label for="skor_${name}"><br>Skor maksimum</label>
+      <div class="col-lg-4">
+        <label for="skor_${name}">Skor maksimum</label>
         <input type="number" class="form-control skor_${name} soal" value="1" name = "${name}" oninput="" min="1">
       </div>
-      <div class="col-sm-2">
-        <label for="benar_${name}"><br>Jumlah benar</label>
+      <div class="col-lg-4">
+        <label for="benar_${name}">Jumlah benar</label>
         <input type="number" class="form-control benar_${name} soal" value="" name ="${name}" oninput="" min="0">
       </div>
     </div>
@@ -755,12 +792,14 @@
   var type_of_semifixed = ["kelompok", "jagan"]
   var pointer = {};
 
+ 
+
   $(document).ready(function(){
-      //Untuk soal uraian
+      //Untuk soal uraian dan bacaan
       for(var i=0;i<type_of_relative.length;i++){
         pointer[type_of_relative[i]]=1;
         var generator = generate_text(type_of_relative[i], pointer[type_of_relative[i]]);
-        $('#score_'+type_of_relative[i]).append(generator.form).append(generator.helper);
+        $('#score_'+type_of_relative[i]).append(generator);
         generate(type_of_relative[i], pointer[type_of_relative[i]]);
       }
 
@@ -773,10 +812,18 @@
       }
   })
 
+  function checkPointer(pointer, name){
+      if(pointer>1){
+        $('#sub_'+name).show();
+      }
+      if(pointer<=1){
+        $('#sub_'+name).hide();
+      }
+  }
+
   function generateSemiFixed(name, pointer){
     $("#add_"+name).click(function(){
         pointer++;
-        console.log(name);
         var generator = generateGroup(name, pointer);
         $('#score_'+name).append(generator);
         checkPointer(pointer, name);
@@ -793,28 +840,26 @@
     $("#add_"+name).click(function(){
         pointer++;
         var generator = generate_text(name, pointer);
-        $('#score_'+name).append(generator.form).append(generator.helper);
+        $('#score_'+name).append(generator);
+        $('#sub_'+name).text("Kurangi Soal Nomor "+pointer);
+        $('#add_'+name).text("Tambah Soal Nomor "+(pointer+1));
         checkPointer(pointer, name);
     })
 
     $("#sub_"+name).click(function(){
         $(`#${name}_${pointer}`).remove();
+        $('#add_'+name).text("Tambah Soal Nomor "+pointer);
         pointer--;
+        $('#sub_'+name).text("Kurangi Soal Nomor "+pointer);
         checkPointer(pointer, name);
     })
   }
 
 
-  function checkPointer(pointer, name){
-      if(pointer>1){
-        $('#sub_'+name).show();
-      }
-      if(pointer<=1){
-        $('#sub_'+name).hide();
-      }
-  }
+  
 
   $('#img-multiple-choice').click(function(){
+    $('#pop-up').html(base_pop_up);
     var render = `<!--Petunjuk Penggunaan Pilgan-->
     <ol class="petunjuk"><br>
     <li>
@@ -837,13 +882,12 @@
   })
 
   $('#img-multiple-answers').click(function(){
+    $('#pop-up').html(base_pop_up);
     var render=`<!--Petunjuk penggunaan-->
-    <b class="judul_petunjuk">Petunjuk penggunaan : </b>
     <ol class="petunjuk">
       <li>Jika jumlah soal dengan jawaban ganda cukup banyak, anda dapat menggunakan pilihan ganda dengan mengisi jumlah benar
         <br>dengan bilangan pecahan (jika terdapat soal yang sebagian benar). </li>
-      <li>Jumlah kelompok jawaban menunjukkan jumlah pilihan yang benar. </li>
-      <li>Abaikan jumlah pilihan yang benar </li>
+      <li>Jumlah kelompok jawaban menunjukkan jumlah pilihan yang terdapat dengan kunci jawaban untuk satu soal. </li>
     </ol>
     <!--End petunjuk penggunaan-->`
 

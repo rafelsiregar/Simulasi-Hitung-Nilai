@@ -182,18 +182,16 @@ function count(){
         bobot : Number(bobot['uas'])
     } 
 
-    console.log(typeof uas['bobot'])
 
     if(nilai_harian['tugas']['nilai']==null && nilai_harian['ulangan']['nilai']==null){
-        alert("Harap menginput minimal satu elemen nilai harian");
+        renderAlert("Harap menginput minimal satu elemen nilai harian");
         return;
     }else if(nilai_harian['tugas']['nilai']==null)nilai_harian['tugas']['nilai']=0;
     else if(nilai_harian['ulangan']['nilai']==null) nilai_harian['ulangan']['nilai']=0;
 
     
     //Menghitung nilai untuk elemen nilai harian
-    var elemen_harian = (Number(nilai_harian['tugas']['nilai']+nilai_harian['ulangan']['nilai'])/
-    (nilai_harian['tugas']['jumlah']+nilai_harian['ulangan']['jumlah']))
+    var elemen_harian = (Number(nilai_harian['tugas']['nilai']+nilai_harian['ulangan']['nilai'])/(nilai_harian['tugas']['jumlah']+nilai_harian['ulangan']['jumlah']))
     
     console.log(nilai_harian)
 
@@ -206,16 +204,10 @@ function count(){
     nilai_akhir = nilai_akhir+bonus_score>100? 100:nilai_akhir+bonus_score;
 
 
-    document.getElementById("nilai_utama").innerHTML = "<b>"+Math.round(nilai_akhir)+"</b>";
-    var huruf = document.getElementsByClassName("huruf");
-    huruf[0].innerHTML= getGrade(nilai_akhir/25);
-    huruf[1].innerHTML=getGradeVersion2(nilai_akhir/25);
-    huruf[2].innerHTML=getGradeVersion2((3*nilai_akhir+100)/100);
-    var four = document.getElementsByClassName("angka");
-    four[0].innerHTML=(nilai_akhir/25).toFixed(2);
-    four[1].innerHTML=((3*nilai_akhir+100)/100).toFixed(2);
+    $("#nilai_utama").text(Math.round(nilai_akhir));
     document.getElementById("ket_nilai").style.display="block";
-    open("original", nilai_akhir)
+    open("huruf", getGrade(nilai_akhir))
+    open("original", nilai_akhir);
     open("harian", elemen_harian);
 }
 
@@ -229,11 +221,26 @@ function open(id, value){
 }
 
 
+function getGrade(num){
+    var gradeList = [
+        {grade:"A", min : 86, max:100},
+        {grade : "B", min : 80, max: 85},
+        {grade : "C", min : 75, max : 79},
+        {grade : "D", min : 60, max : 74},
+        {grade : "E", min : 0, max : 59},
+    ]
+    num = Math.round(num);
+    for(var i=0;i<gradeList.length;i++){
+            console.log(gradeList[i].grade)
+            if(Number(num)>=Number(gradeList[i]["min"]) && Number(num)<=Number(gradeList[i]["max"])){
+                return gradeList[i].grade;
+            }   
+        }
+}
 
 
 
-
-function getGradeVersion2(num){
+/*function getGradeVersion2(num){
     var gradeList = [
     {grade:"A", min : 3.85, max:4},
     {grade : "A-", min : 3.51, max: 3.84},
@@ -254,34 +261,9 @@ function getGradeVersion2(num){
                 return gradeList[i].grade;
             }   
         }
-}
+}*/
 
-function getGrade(num){
-    var gradeList = [
-        {grade:"A", min : 3.66, max:4},
-        {grade : "A-", min : 3.33, max: 3.66},
-        {grade : "B+", min : 3.00, max : 3.33},
-        {grade : "B", min : 2.66, max : 3.00},
-        {grade : "B-", min : 2.33, max : 2.66},
-        {grade:"C+", min:2.00, max:2.33},
-        {grade:"C", min:1.66, max:2.00},
-        {grade:"C-", min:1.33, max:1.66},
-        {grade:"D+", min:1.00, max :1.33},
-        {grade:"D", min:0.00, max:1.00}
-    ]
-    num = num.toFixed(2);
-        if(Number(num)==0) return "E";
-        else if(Number(num)==1) return "D";
-        else{
-            for(var i=0;i<gradeList.length;i++){
-                console.log(gradeList[i].grade)
-                if(Number(num)>Number(gradeList[i]["min"]) && Number(num)<=Number(gradeList[i]["max"])){
-                    return gradeList[i].grade;
-                }   
-            }
-        }
-    
-}
+
 
 
 

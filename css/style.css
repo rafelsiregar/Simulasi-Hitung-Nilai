@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Ubuntu:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Ubuntu:wght@400;500;600;700&display=swap');
 
 a,.a-tugas {
     color : white;
@@ -96,11 +96,17 @@ section, #title, b {
 }
 
 
+#about {
+    padding-top : 5vh;
+}
+
+
+
 #about, #feature {
     padding-bottom: 10vh;
 }
 
-,.paragraph {
+.paragraph {
     margin-top : 10vh;
 }
 
@@ -299,7 +305,7 @@ h1 {
 }
 
 .btn-custom-maroon {
-    background-color : maroon;
+    background-color : rgb(128, 0, 0);
     color : white;
     font-size: 1rem !important;
     padding: 1vh 1vw;
@@ -317,7 +323,7 @@ h1 {
 }
 
 .btn-custom-light {
-    background-color : rgb(150, 1, 1);
+    background-color : rgb(84, 0, 0);
     color : white;
     padding: 1vh 1vw;
     border-radius: 2rem;
@@ -396,13 +402,27 @@ footer.disclaimer {
     position: absolute;
 }
 
-.info-sekolah .form-control, .info-jenjang .form-control, .state.form-control, .soal.form-control, .nilai.form-control, .aspek.form-control, .nilai-small.form-control{
+.info-sekolah .form-control, .info-jenjang .form-control, .state.form-control, .soal.form-control, .nilai.form-control, .aspek.form-control, .nilai-small.form-control, .nilai-std.form-control, .form-control-plaintext {
     background-color: gray;
     border-radius: 10px;
     border: none;
     color : white;
     font-family: 'Ubuntu', sans-serif;
 }
+
+.form-control-plaintext {
+    padding: 0.5vh 0.5vw;
+}
+
+textarea {
+    background-color: gray !important;
+    border-radius: 10px !important;
+    border: none !important;
+    color : white !important;
+    font-family: 'Ubuntu', sans-serif !important;
+    height : 30vh !important;
+}
+
 
 .nilai.form-control {
     width: 20vw;
@@ -413,7 +433,7 @@ footer.disclaimer {
     max-width:15vw;
 }
 
-.state.form-control::placeholder, .nilai.form-control::placeholder, .soal.form-control::placeholder, .nilai-small.form-control::placeholder, .aspek.form-control::placeholder {
+.state.form-control::placeholder, .nilai.form-control::placeholder, .soal.form-control::placeholder, .nilai-small.form-control::placeholder, .nilai-std.form-control::placeholder,.aspek.form-control::placeholder {
     color :rgba(44, 0, 0, 0.5);
     font-family: 'Ubuntu';
 }
@@ -430,9 +450,14 @@ label, p, ol li {
 
 
 .primary {
-    justify-content: left;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat';
     font-size: 40pt;
+    font-weight: 700;
+}
+
+.grade {
+    font-size: 30pt;
+    font-weight: 500;
 }
 
 .head {
@@ -475,19 +500,22 @@ label, p, ol li {
 
 .secondary {
     color : white;
-    font-size: 12pt;
-    font-family: 'Montserrat';
+    font-size: 30pt;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .main-info {
     font-size: 20pt;
-    font-weight: 400;
-    text-align: center ;
+    font-weight: 500;
+    text-align: center !important;
+    margin: 2.5vh 0;
 }
 
 .info {
     font-size: 15pt;
     text-align: center !important;
+    margin: 1vh 0;
 }
 
 
@@ -496,37 +524,37 @@ label, p, ol li {
     font-size: 35pt;
 }
 
-.floor, .ceiling {
-    font-size: 30pt;
-}
 
-.onepoint, .vthree {
-    font-size: 25pt;
-}
 
-#twopoint {
-    font-size: 20pt;
-}
 
-#threepoint {
-    font-size : 18pt;
-}
 
 
 .disclaimer {
     font-size: 8pt;
     text-align: center;
 }
-.four, .onefour, .grade, .grade2, .onefourgrade{
-    font-size: 15pt;
-}
 
-ket {
+
+ket, p.ket {
     color : white;
-    font-size: 10pt;
+    
     margin-top: 0pt;
     text-align: center;
     
+}
+
+ket {
+    font-size: 10pt;
+}
+
+p.ket {
+    font-size: 15pt;
+    margin-top : 1vh;
+}
+
+.keterangan > * > * {
+    margin-left: 5px;
+    font-size: 15pt;
 }
 
 .second {
@@ -590,4 +618,34 @@ footer h6:not(danger) {
     height: 20px;
     width: 20px;
     cursor: pointer;
+}
+
+#alert-pop-up .modal-content {
+    top : 25vh;
+    padding: 4vh 2vw;
+    font-size: 12pt;
+}
+
+.modal-content p {
+    margin-top: 2vh;
+}
+
+#score-detail {
+    display:none;
+    overflow-y: scroll;
+    height: 30vh;
+    background-color: rgba(169, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.question, .answers {
+    font-size: 15pt;
+}
+
+.question {
+    font-weight: bold;
+}
+
+.qa> * {
+    margin : 0 ;
 }

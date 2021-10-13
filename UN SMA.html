@@ -30,10 +30,12 @@
       hanya digunakan untuk pembelajaran Pemrograman Web Dasar.</h6>
     </footer>
   </div>
+
+  <div id="pop-up"></div>
   <!--End Program UN SMA-->
     
 
-    <script src="src/general.js"></script>
+    <script src="src/general_alert.js"></script>
     <script src="src/components.js"></script>
     <script>
 
@@ -65,13 +67,16 @@
         return manipulate;
     }*/
 
-    function noOutOfRange(element, lowRange, highRange){
+    function noOutOfRange(element){
+      var selected = false;
         for(var i=0;i<element.length;i++){
-            if(element[i]<0 || element[i]>100 || element[i]==""){
-                return false;
+            if(element[i]<0 || element[i]>100 || (i < 3 && element[i]=="")){
+              return false;
+            }else if(i>=3 && element[i]!=""){
+              selected = true;
             }
         }
-        return true;
+        return selected;
     }
 
 
@@ -88,13 +93,21 @@
 
         var sum1 = 0, sum2 = 0;
 
+        var active_element =[0,0] 
+
         for (var i=0;i<6;i++){
+          if(un1[i]!=""){
             var sum1 = sum1+Number(un1[i]);
+            active_element[0]++;
+          }
+          if(un2[i]!=""){
             var sum2 = sum2+Number(un2[i]);
+            active_element[1]++;
+          } 
         }
 
 
-        if(noOutOfRange(un1, 0, 100) && noOutOfRange(un2, 0, 100)){
+        if(noOutOfRange(un1) && noOutOfRange(un2)){
             if(sum1>sum2){
               setText("Nilai rata-rata UN "+sekolah1+" lebih tinggi dibandingkan "+sekolah2);
             } else if (sum1<sum2){
@@ -103,13 +116,18 @@
               setText("Nilai rata-rata UN "+sekolah1+" sama dengan "+sekolah2);
             }
         } else {
-            alert("Mohon maaf, data yang anda masukkan tidak valid");
+            renderAlert("Mohon maaf, data yang anda masukkan tidak valid");
+            return;
         }
+
+        var avg1 = sum1/active_element[0];
+        var avg2 = sum2/active_element[1];
+        console.log(active_element)
 
         document.getElementById("report").style.display="block";
         getSchool("sekolah1", 0);getSchool("sekolah2", 1);
-        getValue("avg1", (sum1/6).toFixed(2)); getValue("avg2", (sum2/6).toFixed(2));
-        getValue("selisih", (Math.abs((sum1/6)-(sum2/6))).toFixed(2));
+        getValue("avg1", (avg1).toFixed(2)); getValue("avg2", (avg2).toFixed(2));
+        getValue("selisih", (Math.abs((avg1)-(avg2))).toFixed(2));
 
         }
     </script>

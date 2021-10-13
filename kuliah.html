@@ -181,31 +181,44 @@
           <div id="ket_nilai" style="display:none">
             <p id="ket_total">Nilai yang diperoleh : <br></p>
 
-
             <!--Keterangan Nilai-->
-            <div class="d-flex">
-              <p id="nilai_utama" class="primary number"></p>
-              <p id="nilai_huruf" class="primary grade ml-2 mt-1"></p>
+            <div class="d-flex justify-content-center">
+              <p id="nilai_utama" class="primary"></p>
+              <p id="nilai_huruf" class="primary grade mt-4 ml-3"></p>
             </div>
-            <div class="d-inline-flex" id="div_tugas" hidden>
-              <p>Nilai elemen tugas : </p><p id="elemen_tugas" class="secondary ml-2"></p>
-              <p class="ml-2">(Bobot : </p><p id="bobot_elemen_tugas" class="secondary ml-2">)</p>
+            <!--End Keterangan Nilai-->
+
+            <!--Rincian Nilai-->
+            <div class="justify-content-center">
+              <div id="div_tugas" hidden>
+                <div class="d-inline-flex">
+                  <p>Nilai elemen tugas : </p>
+                  <p id="elemen_tugas" class=" ml-2"></p>
+                  <p class="ml-2">(Bobot : </p><p id="bobot_elemen_tugas" class=" ml-2">)</p>
+                </div>
+              </div>
+              <div id="div_uts" hidden>
+                <div class="d-inline-flex">
+                  <p>Nilai elemen UTS : </p><p id="elemen_uts" class=" ml-2"></p><br>
+                  <p class='ml-2'>(Bobot : </p><p id="bobot_elemen_uts" class=" ml-2">)</p>
+                </div>
+              </div>
+              <div  id="div_uas" hidden>
+                <div class="d-inline-flex">
+                  <p>Nilai elemen UAS : </p><p id="elemen_uas" class=" ml-2"></p>
+                  <p class='ml-2'>(Bobot : </p><p id="bobot_elemen_uas" class=" ml-2">)</p>
+                </div>
+              </div>
+              <div  id="div_tambahan" hidden>
+                <div class="d-inline-flex">
+                  <p>Nilai elemen tambahan : </p><p id="elemen_tambahan" class=" ml-2"></p>
+                  <p class='ml-2'>(Bobot : </p><p id="bobot_elemen_tambahan" class=" ml-2">)</p>
+                </div>
+              </div>
             </div>
-            <div class="d-flex" id="div_uts" hidden>
-              <p>Nilai elemen UTS : </p><p id="elemen_uts" class="secondary ml-2"></p><br>
-              <p class='ml-2'>(Bobot : </p><p id="bobot_elemen_uts" class="secondary ml-2">)</p>
-            </div>
-            <div class="d-flex" id="div_uas" hidden>
-              <p>Nilai elemen UAS : </p><p id="elemen_uas" class="secondary ml-2"></p>
-              <p class='ml-2'>(Bobot : </p><p id="bobot_elemen_uas" class="secondary ml-2">)</p>
-            </div>
-            <div class="d-flex" id="div_tambahan" hidden>
-              <p>Nilai elemen tambahan : </p><p id="elemen_tambahan" class="secondary ml-2"></p>
-              <p class='ml-2'>(Bobot : </p><p id="bobot_elemen_tambahan" class="secondary ml-2">)</p>
-            </div>
+            <!--End Rincian Nilai-->
+
           </div>
-          <!--End keterangan nilai-->
-        </div>
         </div>
         <!--End Pengolahan Skor-->
 
@@ -224,9 +237,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
-    <script src="../src/general_alert.js"></script>
-    <script src="../src/general_report.js"></script>
-    <script src="../src/nilai_akhir.js"></script>
-    <script src="../src/jquery_implementation.js"></script>
+    <script src="src/general_alert.js"></script>
+    <script src="src/general_report.js"></script>
+    <script src="src/nilai_akhir.js"></script>
+    <script src="src/jquery_implementation.js"></script>
     </body>
     </html>

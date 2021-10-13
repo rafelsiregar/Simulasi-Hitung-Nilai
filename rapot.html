@@ -48,8 +48,7 @@
                 <button type="button" id="add_tugas" class="btn btn-custom-add mt-2">Tambah Tugas</button>
                 <div id="info_ulangan" class="mt-2"></div>
                 <button type="button" id="sub_ulangan" class="mt-2 btn btn-custom-light" hidden> Kurangi Ulangan</button>
-                <button type="button" id="add_ulangan" class="btn btn-custom-add mt-2"
-                >Tambah Ulangan</button>
+                <button type="button" id="add_ulangan" class="btn btn-custom-add mt-2">Tambah Ulangan</button>
             </div>
             <!--End nilai harian-->
 
@@ -125,36 +124,49 @@
         <!--Tempat Pengolahan Skor-->
         <div class="col-6 justify-content-start">
           <div id="ket_nilai" style="display:none">
-            <p id="ket_total">Nilai yang diperoleh : <br></p>
+            <p id="ket_total" class="info">Nilai yang diperoleh : </p>
             <!--Keterangan Nilai-->
-            <div class="d-inline-flex">
-              <p id="nilai_utama" class="primary number"></p>
+            <div class="d-flex justify-content-center">
+              <p id="nilai_utama" class="primary"></p>
             </div>
-            <br>
-            <div class="d-flex" id="div_original" hidden>
-              <p>Nilai sebelum dibulatkan : </p><p id="elemen_original" class="second secondary ml-2"></p>
+            <!--End Keterangan Nilai-->
+
+
+
+            
+
+            <!--Keterangan nilai huruf-->
+            <div id="div_huruf" hidden> 
+              <p class="info">Nilai huruf : </p>
+              <div class="d-flex justify-content-center" >
+                <p id="elemen_huruf" class="secondary ml-2"></p>
+              </div>
+              <p class="disclaimer">(Nilai huruf ini hanya berlaku jika KKM=75)</p>
             </div>
-            <div class="d-flex" id="div_huruf_1" hidden>
-              <p>Nilai huruf : </p><p class="second huruf secondary ml-2"></p>
-              
+            <!--End keterangan nilai huruf-->
+
+
+            <!--Keterangan Nilai sebelum dibulatkan-->
+            <div id="div_original" hidden> 
+              <p class="info">Nilai sebelum dibulatkan : </p>
+              <div class="d-flex justify-content-center" >
+                <p id="elemen_original" class="secondary ml-2"></p>
+              </div>
             </div>
-            <div class="d-flex" id="div_huruf_2" hidden>
-              <p>Nilai huruf (versi 2) : </p><p class="huruf second secondary ml-2"></p>
+            <!--End Keterangan Nilai sebelum dibulatkan-->
+
+            <!--Keterangan nilai rerata harian-->
+            <div id="div_harian" hidden> 
+              <p class="info">Nilai rerata harian : </p>
+              <div class="d-flex justify-content-center" >
+                <p id="elemen_harian" class="secondary ml-2"></p>
+              </div>
             </div>
-            <div class="d-flex" id="div_huruf_3" hidden>
-              <p>Nilai huruf (versi 3) : </p><p class="huruf second secondary ml-2"></p>
-            </div>
-            <div class="d-flex" id="div_zerofour" hidden>
-              <p>Nilai dalam 0-4 : </p><p class="angka second secondary ml-2"></p>
-            </div>
-            <div class="d-flex" id="div_onefour" hidden>
-              <p>Nilai dalam 1-4 : </p><p class="angka second secondary ml-2"></p>
-            </div>
-            <div class="d-flex" id="div_harian" hidden>
-              <p>Nilai rata-rata harian : </p><p id="elemen_harian" class="second secondary ml-2"></p>
-            </div>
-            </div>
-            <!--End keterangan nilai-->
+            <!--End keterangan nilai harian-->
+
+            
+          </div>
+          <!--End keterangan nilai-->
         </div>
         </div>
         <!--End olah skor-->
@@ -163,7 +175,7 @@
     <div id="pop-up"></div>
 
     
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
+    
 
     <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
     <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
@@ -176,12 +188,6 @@
     <script src="src/jquery_implementation.js">
     </script>
     
-    <script>
-      // All animations will take exactly 500ms
-      var scroll = new SmoothScroll('a[href*="#"]', {
-              speed: 200,
-              speedAsDuration: true
-          });
-    </script>
+    
     </body>
     </html>

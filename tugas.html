@@ -35,13 +35,14 @@
           </li>
         </ul>
         <div class="tab-content mt-3">
+          <!--Tab Ujian-->
           <div class="tab-pane active" id="single" role="tabpanel" aria-labelledby="home-tab">
               <!--Program Utama untuk mengolah nilai ujian-->
               <div class="main-element ml-1">
                 
                 <!--Program Utama-->
                 <div class="row">
-                  <div class="col-8 d-block justify-content-start">
+                  <div class="col-6 d-block justify-content-start">
                   <!--Menentukan jenis soal-->  
                   <div class="mt-3" id="soal">
                   <p class="font-weight-bold" style="font-size: 20pt;"> Jenis Soal </p>
@@ -112,7 +113,7 @@
                       </div>            
                       <div id="score_bacaan"></div>
                       <button type="button" id="sub_bacaan" class="mt-2 btn btn-custom-light" style="display:none"> Kurangi Soal</button>
-                      <button type="button" id="add_bacaan" class="btn btn-custom-add mt-2">Tambah Soal</button>
+                      <button type="button" id="add_bacaan" class="btn btn-custom-add mt-3">Tambah Soal</button>
                     </div>
     
     
@@ -130,18 +131,19 @@
                         </div>
                       </div>
                         <div class="form-row">
-                        <div class="col-sm-2">
-                          <label for="soal_pilgan">Jumlah soal</label>
-                          <input type="number" id="soal_pilgan" class="form-control soal" value="" name ="pilgan" oninput="autoInput(this.name)" min="1">
+                          <div class="col-sm-4">
+                            <label for="pilgan">Jumlah benar</label>
+                            <input type="number" id="benar_pilgan" class="form-control soal" value="" name ="pilgan" oninput="" min="0">
+                          </div>
+                          <div class="col-sm-4">
+                            <label for="soal_pilgan">Jumlah soal</label>
+                            <input type="number" id="soal_pilgan" class="form-control soal" value="" name ="pilgan" oninput="autoInput(this.name)" min="1">
+                          </div>
+                        <div class="col-sm-4">
+                          <label for="pilgan">Skor maksimum</label>
+                          <input type="number" id="skor_pilgan" class="form-control soal" value="" name = "pilgan" oninput="" min="1">
                         </div>
-                      <div class="col-sm-2">
-                        <label for="pilgan">Skor maksimum</label>
-                        <input type="number" id="skor_pilgan" class="form-control soal" value="" name = "pilgan" oninput="" min="1">
-                      </div>
-                      <div class="col-sm-2">
-                        <label for="pilgan">Jumlah benar</label>
-                        <input type="number" id="benar_pilgan" class="form-control soal" value="" name ="pilgan" oninput="" min="0">
-                      </div>
+                      
                     </div>         
                 </div>
                 <!--End Pilihan Ganda-->
@@ -154,18 +156,19 @@
                         </div>
                       </div>
                         <div class="form-row">
-                        <div class="col-sm-2">
+                          <div class="col-sm-4">
+                            <label for="benar_isian">Jumlah benar</label>
+                            <input type="number" id="benar_isian" value="" name ="isian" class="form-control soal" oninput = "" min="0">
+                          </div>
+                        <div class="col-sm-4">
                           <label for="soal_isian">Jumlah soal</label>
                           <input type="number" id="soal_isian" value="" class="form-control soal" name ="isian" oninput="autoInput(this.name)" min="1">
                         </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-4">
                         <label for="skor_isian">Skor maksimum</label>
                         <input type="number" id="skor_isian" value="" name = "isian" class="form-control soal" min="1">
                       </div>
-                      <div class="col-sm-2">
-                        <label for="benar_isian">Jumlah benar</label>
-                        <input type="number" id="benar_isian" value="" name ="isian" class="form-control soal" oninput = "" min="0">
-                      </div>
+                      
                     </div>
                     </div>
                     <!--End Isian Singkat-->
@@ -179,8 +182,11 @@
                         </div>
                       </div>
                         <div id="score_uraian"></div>
-                        <button type="button" id="sub_uraian" class="mt-2 btn btn-custom-light" style="display:none"> Kurangi Soal</button>
-                      <button type="button" id="add_uraian" class="btn btn-custom-add mt-2">Tambah Soal</button>
+                        <div class="form-inline">
+                          <button type="button" id="sub_uraian" class="mt-2 btn btn-custom-light mr-2" style="display:none">Hapus Soal Nomor 2</button>
+                          <button type="button" id="add_uraian" class="btn btn-custom-add mt-3">Tambah Soal Nomor 2</button>
+                        </div>
+                        
                     </div>
                     <!--End Uraian-->
                   
@@ -193,18 +199,19 @@
                       </div>
                     </div>
                     <div class="form-row">
-                      <div class="col-sm-2">
-                        <label for="soal_cocok">Jumlah soal</label>
-                        <input type="number" id="soal_cocok" class="form-control soal" value="" name ="cocok" oninput="autoInput(this.name)" min="1">
-                      </div>
-                      <div class="col-sm-2">
-                        <label for="skor_cocok">Skor maksimum</label>
-                        <input type="number" id="skor_cocok" class="form-control soal" value="" name = "cocok" oninput="" min="1">
-                      </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-4">
                         <label for="benar_cocok">Jumlah benar</label>
                         <input type="number" id="benar_cocok" class="form-control soal" value="" name ="cocok" oninput="" min="0">
                       </div>
+                      <div class="col-sm-4">
+                        <label for="soal_cocok">Jumlah soal</label>
+                        <input type="number" id="soal_cocok" class="form-control soal" value="" name ="cocok" oninput="autoInput(this.name)" min="1">
+                      </div>
+                      <div class="col-sm-4">
+                        <label for="skor_cocok">Skor maksimum</label>
+                        <input type="number" id="skor_cocok" class="form-control soal" value="" name = "cocok" oninput="" min="1">
+                      </div>
+                      
                   </div>         
                 </div>
                 <!--End Mencocokkan-->
@@ -218,18 +225,19 @@
                     </div>
                   </div>
                   <div class="form-row">
-                    <div class="col-sm-2">
-                      <label for="soal_cocokgambar">Jumlah soal</label>
-                      <input type="number" id="soal_cocokgambar" class="form-control soal" value="" name ="cocok" oninput="autoInput(this.name)" min="1">
-                    </div>
-                    <div class="col-sm-2">
-                      <label for="skor_cocokgambar">Skor maksimum</label>
-                      <input type="number" id="skor_cocokgambar" class="form-control soal" value="" name = "cocok" oninput="" min="1">
-                    </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
                       <label for="benar_cocokgambar">Jumlah benar</label>
                       <input type="number" id="benar_cocokgambar" class="form-control soal" value="" name ="cocok" oninput="" min="0">
                     </div>
+                    <div class="col-sm-4">
+                      <label for="soal_cocokgambar">Jumlah soal</label>
+                      <input type="number" id="soal_cocokgambar" class="form-control soal" value="" name ="cocok" oninput="autoInput(this.name)" min="1">
+                    </div>
+                    <div class="col-sm-4">
+                      <label for="skor_cocokgambar">Skor maksimum</label>
+                      <input type="number" id="skor_cocokgambar" class="form-control soal" value="" name = "cocok" oninput="" min="1">
+                    </div>
+                    
                 </div>         
               </div>
               <!--End Mencocokkan Gambar-->
@@ -255,18 +263,19 @@
                       </div>
                     </div>
                     <div class="form-row">
-                      <div class="col-sm-2">
+                      <div class="col-sm-4">
+                        <label for="benar_bs">Jumlah benar</label>
+                        <input type="number" id="benar_bs" class="form-control soal" value="" name ="pilgan" oninput="" min="0">
+                      </div>
+                      <div class="col-sm-4">
                         <label for="soal_bs">Jumlah soal</label>
                         <input type="number" id="soal_bs" class="form-control soal" value="" name ="bs" oninput="autoInput(this.name)" min="1">
                       </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-4">
                         <label for="skor_bs">Skor maksimum</label>
                         <input type="number" id="skor_bs" class="form-control soal" value="" name = "bs" oninput="" min="1">
                       </div>
-                    <div class="col-sm-2">
-                      <label for="benar_bs">Jumlah benar</label>
-                      <input type="number" id="benar_bs" class="form-control soal" value="" name ="pilgan" oninput="" min="0">
-                    </div>
+                    
                   </div>         
                 </div>
                 <!--End Betul/Salah-->
@@ -280,18 +289,19 @@
                       </div>
                     </div>
                     <div class="form-row">
-                      <div class="col-sm-2">
-                        <label for="soal_tts">Jumlah soal</label>
-                        <input type="number" id="soal_tts" class="form-control soal" value="" name ="tts" oninput="autoInput(this.name)" min="1">
-                      </div>
-                      <div class="col-sm-2">
-                        <label for="skor_tts">Skor maksimum</label>
-                        <input type="number" id="skor_tts" class="form-control soal" value="" name = "tts" oninput="" min="1">
-                      </div>
-                      <div class="col-sm-2">
+                      <div class="col-sm-4">
                         <label for="benar_tts">Jumlah benar</label>
                         <input type="number" id="benar_tts" class="form-control soal" value="" name ="tts" oninput="" min="0">
                       </div>
+                      <div class="col-sm-4">
+                        <label for="soal_tts">Jumlah soal</label>
+                        <input type="number" id="soal_tts" class="form-control soal" value="" name ="tts" oninput="autoInput(this.name)" min="1">
+                      </div>
+                      <div class="col-sm-4">
+                        <label for="skor_tts">Skor maksimum</label>
+                        <input type="number" id="skor_tts" class="form-control soal" value="" name = "tts" oninput="" min="1">
+                      </div>
+                      
                     </div>         
                   </div>
                   <!--End TTS-->
@@ -333,106 +343,189 @@
                   <!--End Input Nilai-->
                   
                   <!--Tempat Pengolahan Skor-->
-                  <div class="col-4 justify-content-start">
+                  <div class="col-6 justify-content-start p-5 ">
                       <div class="justify-content-center">
-                        <p id="keterangan_bacaan" hidden>Skor yang diperoleh untuk bacaan :
-                          <output id="ket_bacaan"></output>
-                        </p>
-                        <p id="keterangan_pilgan" hidden>Skor yang diperoleh untuk pilgan :
-                          <output id="ket_pilgan"></output>
-                        </p>
-                        <p id="keterangan_isian" hidden>Skor yang diperoleh untuk isian :
-                          <output id="ket_isian"></output>
-                        </p>
-                        <p id="keterangan_uraian" hidden>Skor yang diperoleh untuk uraian :
-                          <output id="ket_uraian"></output></p>
-                        <p id="keterangan_cocok" hidden>Skor yang diperoleh untuk mencocokkan :
-                          <output id="ket_cocok"></output></p>
-                        <p id="keterangan_cocokgambar" hidden>Skor yang diperoleh untuk mencocokkan gambar :
-                          <output id="ket_cocokgambar"></output></p>
-                        <p id="keterangan_kelompok" hidden>Skor yang diperoleh untuk mencocokkan berkelompok :
-                          <output id="ket_kelompok"></output></p>
-                        <p id="keterangan_jagan" hidden>Skor yang diperoleh untuk mencocokkan berkelompok :
-                          <output id="ket_jagan"></output></p>
-                        <p id="keterangan_bs" hidden>Skor yang diperoleh untuk soal Betul/Salah :
-                          <output id="ket_bs"></output></p>
-                        <p id="keterangan_tts" hidden>Skor yang diperoleh untuk TTS :
-                          <output id="ket_tts"></output></p>  
+                        <div id="keterangan_bacaan" hidden class="keterangan">
+                          <div class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk bacaan :</p>
+                            <p id="ket_bacaan"></p>
+                          </div>
+                        </div>
+                        <div id="keterangan_pilgan" hidden class="keterangan">
+                          <div class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk pilgan :
+                            </p>
+                            <p id="ket_pilgan"></p>
+                          </div>
+                        </div>
+                        <div id="keterangan_isian" hidden class="keterangan">
+                          <div class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk isian :
+                              
+                            </p>
+                            <p id="ket_isian"></p>
+                          </div>
+                        </div>
+                        <div id="keterangan_uraian" hidden class="keterangan">
+                          <div class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk uraian :
+                              <p id="ket_uraian"></p></p>
+                          </div>
+                        </div>
+                        <div id="keterangan_cocok" hidden class="keterangan">
+                          <div class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk mencocokkan :
+                              </p>
+                              <p id="ket_cocok"></p>
+                          </div>
+                        </div>
+                        <div id="keterangan_cocokgambar" hidden class="keterangan">
+                          <div  class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk mencocokkan gambar :
+                              </p>
+                              <p id="ket_cocokgambar"></p>
+                          </div>
+                        </div>
+                        <div  id="keterangan_kelompok" hidden class="keterangan">
+                          <div class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk mencocokkan berkelompok :
+                              </p>
+                              <p id="ket_kelompok"></p>
+                          </div>
+                        </div>
+                        <div id="keterangan_jagan" hidden class="keterangan">
+                          <div  class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk pilihan ganda dengan lebih dari 1 pilihan jawaban :
+                          </p>
+                          <p id="ket_jagan"></p>
+                          </div>
+                        </div>
+                        <div id="keterangan_bs" hidden class="keterangan">
+                          <div  class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk soal Betul/Salah :
+                              </p>
+                              <p id="ket_bs"></p>
+                          </div>
+                        </div>
+                        <div id="keterangan_tts" hidden class="keterangan">
+                          <div class="d-inline-flex">
+                            <p >Skor yang diperoleh untuk TTS :
+                             </p>  
+                             <p id="ket_tts"></p>
+                        </div>
+                        
+                      </div>
                       </div>
                       <div id="ket_nilai" style="display:none">
-                        <p id="ket_total">Nilai yang diperoleh : </p>
-                        <!--Keterangan Nilai-->
-                        <div class="d-flex justify-content-center">
-                          <p><output id="nilai_utama" class="primary"></output>
-                            <ket> (Hasil pembulatan baik) </ket><br>
-                          </p>
-                        </div>
-                        <!--Hasil Bonus-->
-                        <div class="justify-content-center">
-                          <button type="button" class="btn btn-custom-light mt-2 btn-block" id="show_bonus">Tampilkan versi lain</button>
-                        </div>
-                        <div id="bonus_result" style="display:none">
-                            <div class="d-flex justify-content-center">
-                              <p>
-                                <output class="bonus secondary"></output>
-                                <ket> (Hasil bonus)</ket><br>
-                              </p>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                              <p>
-                                <output class="bonus secondary"></output>
-                                <ket> (Hasil bonus (versi 2))</ket><br>
-                              </p>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                              <p>
-                                <output class="bonus secondary"></output>
-                                <ket> (Hasil bonus (versi 3))</ket><br>
-                              </p>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                              <p>
-                                <output class="bonus secondary"></output>
-                                <ket> (Hasil bonus (versi 4))</ket><br>
-                              </p>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                              <p>
-                                <output class="bonus secondary"></output>
-                                <ket> (Hasil bonus (versi 5))</ket><br>
-                              </p>
-                            </div>
+                        <div id="main-score">
+                          <p id="ket_total" class="info">Nilai yang diperoleh : </p>
+
+                          <!--Keterangan Nilai Utama-->
+                          <div class="d-flex justify-content-center">
+                              <p id="nilai_utama" class="primary"></p>
                           </div>
-                          <!--Tombol untuk menampilkan hasil pembulatan-->
-                          <div class="justify-content-center">
-                            <button type="button" class="btn btn-custom-light mt-2 btn-block" id="show_round">Tampilkan pembulatan lain</button>
+                          <!--End Keterangan Nilai Utama-->
+
+                          <!--Tombol untuk menampilkan saran nilai-->
+                          <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-custom-light mt-2 mr-2" id="show_round">Saran nilai lainnya</button>
                           </div>
-                          <!--Hasil Pembulatan-->
-                          <div id="pembulatan" style="display:none">
-                              <p class="main_info">Pembulatan atas dan bawah: </p>
-                              <p class='info'>Nilai versi 1 : </p>
-                            <div class="d-flex justify-content-center">
-                              <p>
-                                <output id="floor" class="floor secondary"></output>
-                                <ket> (Pembulatan bawah)</ket><br>
-                              </p>
-                              <p>
-                                <output id="ceiling" class="ceiling secondary ml-2"></output>
-                                <ket> (Pembulatan atas)</ket><br>
-                              </p>
+                        </div>
+                        <!--End Saran Nilai-->
+                        
+                          
+                        <!--Hasil Pembulatan-->
+                        <div id="score-detail" class="mt-4">
+                              <p class='info'>Hasil Pembulatan : </p>
+                              <div id="v1">
+                                  <div class="d-flex justify-content-center">
+                                    <p>
+                                      <output id="floor" class="floor secondary"></output>
+                                      <ket> (Pembulatan bawah)</ket><br>
+                                    </p>
+                                    <p>
+                                      <output id="ceiling" class="ceiling secondary ml-2"></output>
+                                      <ket> (Pembulatan atas)</ket><br>
+                                    </p>
+                                    <p>
+                                      <output id="vthree" class="vthree secondary ml-2"></output>
+                                      <ket> (Pembulatan versi 3)</ket><br>
+                                    </p>
+                                  </div>
+                                  <div class="d-flex justify-content-center">
+                                    <p>
+                                      <output id="onepoint" class="onepoint secondary ml-2"></output>
+                                      <ket> (Pembulatan satu angka di belakang koma)</ket><br>
+                                    </p>
+                                  </div>
+                                  <div class="d-flex justify-content-center">
+                                    <p>
+                                      <output id="twopoint" class="twopoint secondary ml-2"></output>
+                                      <ket> (Pembulatan dua angka di belakang koma)</ket><br>
+                                    </p>
+                                    
+                                  </div>
+                                  <div class="d-flex justify-content-center">
+                                    <p>
+                                      <output id="threepoint" class="threepoint secondary ml-2"></output>
+                                      <ket> (Pembulatan tiga angka di belakang koma)</ket><br>
+                                    </p>
+                                  </div>
+
+                              </div>
+                            <p class='main-info'>Nilai dengan bonus (versi 1) </p>
+                            <div id="v2">
+                              
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output class="bonus primary"></output>
+                                </p>
+                              </div>
+                              <p class='info'>Hasil Pembulatan :  </p>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="floorv2" class="floor secondary"></output>
+                                  <ket> (Pembulatan bawah)</ket><br>
+                                </p>
+                                <p>
+                                  <output id="ceilingv2" class="ceiling secondary ml-2"></output>
+                                  <ket> (Pembulatan atas)</ket><br>
+                                </p>
+                                <p>
+                                  <output id="vthreev2" class="vthree secondary ml-2"></output>
+                                  <ket> (Pembulatan versi 3)</ket><br>
+                                </p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="onepointv2" class="onepoint secondary ml-2"></output>
+                                  <ket> (Pembulatan satu angka di belakang koma)</ket><br>
+                                </p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="twopointv2" class="twopoint secondary ml-2"></output>
+                                  <ket> (Pembulatan dua angka di belakang koma)</ket><br>
+                                </p>
+                                
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="threepointv2" class="threepoint secondary ml-2"></output>
+                                  <ket> (Pembulatan tiga angka di belakang koma)</ket><br>
+                                </p>
+                              </div>
                             </div>
-                            <p class='info'>Nilai versi 2 : </p>
+
+                            <p class='main-info'>Nilai dengan bonus (versi 2) </p>
+                            <div id="v3">
                             <div class="d-flex justify-content-center">
-                              <p>
-                                <output id="floorv2" class="floor secondary"></output>
-                                <ket> (Pembulatan bawah)</ket><br>
-                              </p>
-                              <p>
-                                <output id="ceilingv2" class="ceiling secondary ml-2"></output>
-                                <ket> (Pembulatan atas)</ket><br>
-                              </p>
+                                <p>
+                                  <output class="bonus primary"></output>
+
+                                </p>
                             </div>
-                            <p class='info'>Nilai versi 3 : </p>
+                            <p class='info'>Hasil Pembulatan :  </p>
                             <div class="d-flex justify-content-center">
                               <p>
                                 <output id="floorv3" class="floor secondary"></output>
@@ -442,133 +535,171 @@
                                 <output id="ceilingv3" class="ceiling secondary ml-2"></output>
                                 <ket> (Pembulatan atas)</ket><br>
                               </p>
+                              <p>
+                                <output id="vthreev3" class="vthree secondary ml-2"></output>
+                                <ket> (Pembulatan versi 3)</ket><br>
+                              </p>
                             </div>
-                            <p class='info'>Nilai versi 4 : </p>
                             <div class="d-flex justify-content-center">
                               <p>
-                                <output id="floorv4" class="floor secondary"></output>
-                                <ket> (Pembulatan bawah)</ket><br>
-                              </p>
-                              <p>
-                                <output id="ceilingv4" class="ceiling secondary ml-2"></output>
-                                <ket> (Pembulatan atas)</ket><br>
+                                <output id="onepointv3" class="onepoint secondary ml-2"></output>
+                                <ket> (Pembulatan satu angka di belakang koma)</ket><br>
                               </p>
                             </div>
-                            <p class='info'>Nilai versi 5: </p>
                             <div class="d-flex justify-content-center">
                               <p>
-                                <output id="floorv5" class="floor secondary"></output>
-                                <ket> (Pembulatan bawah)</ket><br>
+                                <output id="twopointv3" class="twopoint secondary ml-2"></output>
+                                <ket> (Pembulatan dua angka di belakang koma)</ket><br>
                               </p>
-                              <p>
-                                <output id="ceilingv5" class="ceiling secondary ml-2"></output>
-                                <ket> (Pembulatan atas)</ket><br>
-                              </p>
+                              
                             </div>
-                            <p class='info'>Nilai versi 6: </p>
                             <div class="d-flex justify-content-center">
                               <p>
-                                <output id="floorv6" class="floor secondary"></output>
-                                <ket> (Pembulatan bawah)</ket><br>
-                              </p>
-                              <p>
-                                <output id="ceilingv6" class="ceiling secondary ml-2"></output>
-                                <ket> (Pembulatan atas)</ket><br>
+                                <output id="threepointv3" class="threepoint secondary ml-2"></output>
+                                <ket> (Pembulatan tiga angka di belakang koma)</ket><br>
                               </p>
                             </div>
+                            </div>
+                            <p class='main-info'>Nilai dengan bonus (versi 3) </p>
+                            <div id="v4">
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output class="bonus primary"></output>
+                                </p>
+                              </div>
+                              <p class='info'>Hasil Pembulatan :  </p>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="floorv4" class="floor secondary"></output>
+                                  <ket> (Pembulatan bawah)</ket><br>
+                                </p>
+                                <p>
+                                  <output id="ceilingv4" class="ceiling secondary ml-2"></output>
+                                  <ket> (Pembulatan atas)</ket><br>
+                                </p>
+                                <p>
+                                  <output id="vthreev4" class="vthree secondary ml-2"></output>
+                                  <ket> (Pembulatan versi 3)</ket><br>
+                                </p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="onepointv4" class="onepoint secondary ml-2"></output>
+                                  <ket> (Pembulatan satu angka di belakang koma)</ket><br>
+                                </p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="twopointv4" class="twopoint secondary ml-2"></output>
+                                  <ket> (Pembulatan dua angka di belakang koma)</ket><br>
+                                </p>
+                                
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="threepointv4" class="threepoint secondary ml-2"></output>
+                                  <ket> (Pembulatan tiga angka di belakang koma)</ket><br>
+                                </p>
+                              </div>
+                            </div>
+                            <p class='main-info'>Nilai dengan bonus (versi 4) </p>
+                            <div id="v5">
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output class="bonus primary"></output>
+                                </p>
+                              </div>
+                              <p class='info'>Hasil Pembulatan :  </p>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="floorv5" class="floor secondary"></output>
+                                  <ket> (Pembulatan bawah)</ket><br>
+                                </p>
+                                <p>
+                                  <output id="ceilingv5" class="ceiling secondary ml-2"></output>
+                                  <ket> (Pembulatan atas)</ket><br>
+                                </p>
+                                <p>
+                                  <output id="vthreev5" class="vthree secondary ml-2"></output>
+                                  <ket> (Pembulatan versi 3)</ket><br>
+                                </p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="onepointv5" class="onepoint secondary ml-2"></output>
+                                  <ket> (Pembulatan satu angka di belakang koma)</ket><br>
+                                </p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="twopointv5" class="twopoint secondary ml-2"></output>
+                                  <ket> (Pembulatan dua angka di belakang koma)</ket><br>
+                                </p>
+                                
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="threepointv5" class="threepoint secondary ml-2"></output>
+                                  <ket> (Pembulatan tiga angka di belakang koma)</ket><br>
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <p class='main-info'>Nilai dengan bonus (versi 5) </p>
+                            <div id="v6">
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output class="bonus primary"></output>
+                                </p>
+                              </div>
+                              <p class='info'>Hasil Pembulatan :  </p>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="floorv6" class="floor secondary"></output>
+                                  <ket> (Pembulatan bawah)</ket><br>
+                                </p>
+                                <p>
+                                  <output id="ceilingv6" class="ceiling secondary ml-2"></output>
+                                  <ket> (Pembulatan atas)</ket><br>
+                                </p>
+                                <p>
+                                  <output id="vthreev6" class="vthree secondary ml-2"></output>
+                                  <ket> (Pembulatan versi 3)</ket><br>
+                                </p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="onepointv6" class="onepoint secondary ml-2"></output>
+                                  <ket> (Pembulatan satu angka di belakang koma)</ket><br>
+                                </p>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="twopointv6" class="twopoint secondary ml-2"></output>
+                                  <ket> (Pembulatan dua angka di belakang koma)</ket><br>
+                                </p>
+                                
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <p>
+                                  <output id="threepointv6" class="threepoint secondary ml-2"></output>
+                                  <ket> (Pembulatan tiga angka di belakang koma)</ket><br>
+                                </p>
+                              </div>
+                            </div>
+                            
                         </div>
-                        <!--Tombol untuk menampilkan hasil pendekatan dengan satu angka di belakang koma-->
-                        <div class="justify-content-center">
-                          <button type="button" class="btn btn-custom-light mt-2 btn-block" id="show_one_round">
-                            Tampilkan pembulatan satu angka di belakang koma</button>
-                        </div>
-                        <div id="pembulatan_satu" style="display: none;">
-                          <p class="main_info">Pendekatan dengan satu angka di belakang koma: </p>
-                          <!--Hasil pendekatan dengan angka di belakang koma-->
-                          <p class='info'>Nilai versi 1 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="onepoint secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 2 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="onepoint secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 3 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="onepoint secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 4 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="onepoint secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 5 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="onepoint secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 6 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="onepoint secondary"></p>
-                          </div>
-                        </div>
-                        <!--End hasil pendekatan dengan angka di belakang koma-->
-                        <!--Tombol untuk menampilkan hasil pembulatan versi lain-->
-                        <div class="justify-content-center">
-                          <button type="button" class="btn btn-custom-light mt-2 btn-block" id="show_v3_round">Tampilkan pembulatan versi 3</button>
-                        </div>
-                        <!--Hasil pendekatan versi 3-->
-                        <div id="pembulatan_v3" style="display:none">
-                          <p class='info'>Nilai versi 1 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="vthree secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 2 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="vthree secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 3 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="vthree secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 4 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="vthree secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 5 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="vthree secondary"></p>
-                          </div>
-                          <p class='info'>Nilai versi 6 : </p>
-                          <div class="d-flex justify-content-center">
-                            <p class="vthree secondary"></p>
-                          </div>
-                        </div>
-                        <!--End Hasil pendekatan versi 3-->
-                        <!--Tombol untuk menampilkan hasil pendekatan dengan banyak angka di belakang koma-->
-                        <div class="justify-content-center">
-                          <button type="button" class="btn btn-custom-light mt-2 btn-block" id="show_more_round">
-                            Tampilkan pembulatan dengan lebih dari satu angka belakang koma</button>
-                        </div>
-                        <p class="disclaimer" style="text-align: center;">(Nilai selain versi 1 tidak mendukung pembulatan dua dan tiga angka di belakang koma)</p>
-                        <div id="pembulatan_lain" style="display: none;">
-                          <p class="main_info">Pendekatan dengan lebih dari satu angka di belakang koma: </p>
-                        <div class="d-flex justify-content-center">
-                          <p>
-                          <output id="twopoint" class="secondary"></output>
-                          <ket> (Pembulatan dua angka di belakang koma)</ket><br>
-                          </p>
-                        </div>              
-                        <div class="d-flex justify-content-center">
-                          <p>
-                          <output id="threepoint" class="secondary"></output>
-                          <ket> (Pembulatan tiga di belakang koma)</ket><br></p>
-                        </div>
-                        </div>
+                        <!--End menampilkan hasil pembulatan-->
                       </div>
+                      
                     </div>
-                  </div>
+                </div>
+
               </div>
               <!--End Program Utana-->
           </div>
+          <!--End Tab Ujian-->
+
           <div class="tab-pane" id="multicase" role="tabpanel" aria-labelledby="profile-tab">
             <!--Program Utama untuk Membandingkan nilai ujian multikasus-->
             <div class="main-element ml-1">
@@ -602,17 +733,24 @@
                 
                 <!--Tempat Pengolahan Skor-->
                 <div class="col-sm-6 justify-content-start">
+                  
                   <!--Keterangan Nilai-->
                   <div id="keterangan-nilai" style="display: none;">
-                    <p id="ket_total">Nilai yang diperoleh : <br></p>
-                    <!--Keterangan Nilai-->
-                    <div class="d-flex">
-                      <p id="nilai_utama_multicase" class="primary number"></p>
-                    </div>
-                    <div class="d-inline-flex" id="div_state" hidden>
-                      <p>Nilai dalam skala 0-100 : </p><output id="elemen_state" class="secondary ml-2"></output>
-                    </div>
                     <div id="another"><!--Data state--></div>
+                    <p class="info" id="ket_total">Total nilai yang diperoleh : </p>
+                    <!--Keterangan Nilai Utama-->
+                    <div class="d-flex justify-content-center">
+                      <p id="nilai_utama_multicase" class="primary"></p>
+                    </div>
+                    <!--End Keterangan Nilai Utama-->
+                    <div>
+                      <p class="info">Nilai dalam skala 0-100 : </p>
+                      <div class="d-flex justify-content-center" id="div_state" hidden>
+                        <p id="elemen_state" class="secondary ml-2"></p>
+                      </div>
+                    </div>
+                    
+                    
                   </div>
                   <!--End Keterangan Nilai-->
                 </div>
@@ -625,25 +763,7 @@
     </div>
 
     <!--Membuat pop up-->
-    <div class="modal fade" id="modal-pop-up" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="judul_petunjuk text-center" id="exampleModalLongTitle">Petunjuk penggunaan</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <!--Isi Petunjuk di sini-->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="pop-up"></div>
     <!--End Pop Up-->
 
 

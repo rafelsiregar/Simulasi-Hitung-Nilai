@@ -1,8 +1,3 @@
-//Mengolah Alert
-function errorAlert(){alert("Mohon maaf, ada kesalahan dalam input data");}
-function unfilledAlert(){alert("Mohon maaf, data harus diisi");}
-
-
 //Mengolah hidden
 function openHidden(id) {document.getElementById(id).hidden=false};
 function closeHidden(id){document.getElementById(id).hidden=true};
@@ -16,6 +11,8 @@ var confirm = document.getElementById("confirm");
 
 //Pointer untuk aspek tambahan
 var additional = [];
+
+
 
 //Mengkonstruksi pointer
 function construct_pointer(obj){
@@ -120,23 +117,25 @@ function removeAspect(aspek){
     removeElement(aspek, additional);
 }
 
+
+
 function generateAdditionalText(aspek){
     additional.push(aspek);
     console.log(aspek.toLowerCase().replace(" ", "_"))
     return `<div class="data_addit" id="aspek_${aspek.toLowerCase().replace(" ", "_")}">
          <p> ${aspek} </p>
          <div class="form-row data_aspek">
-         <div class="form-group col-sm-2">
+         <div class="form-group col-lg-4">
              <input type="number" class="aspek nilai_aspek form-control input-sm "
              id= "nilai_aspek_${aspek.toLowerCase().replace(" ", "_")}"  placeholder="Nilai" min="1">
          </div>
-         <div class="form-group col-sm-2">
+         <div class="form-group col-lg-4">
              <input type="number" class="aspek bobot_aspek form-control input-sm"  
              id="bobot_aspek_${aspek.toLowerCase().replace(" ", "_")}" placeholder="Bobot" min="1">
          </div>
-         <div class="form-group col-sm-2">
+         <div class="form-group col-lg-4">
             <button type="button" style="margin-top : 0px;" id="remove_aspek_${aspek.toLowerCase().replace(" ", "_")}" 
-            class="btn btn-secondary aspek" onclick = "removeAspect('${aspek}') style='margin-top:0;'" >
+            class="btn btn-custom-light aspek" onclick = "removeAspect('${aspek}')" style='margin-top:0;'" >
             Hapus Aspek </button>
          </div>
        </div>

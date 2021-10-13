@@ -17,7 +17,7 @@ var text_sekolah =
     `
     
     var button = `<div class="ml-sm-2 d-flex justify-content-center">
-                    <button type="button" class="btn btn-light mb-5 mt-4" onclick="compare()">Bandingkan</button>
+                    <button type="button" class="btn btn-custom-add mb-5 mt-4" onclick="compare()">Bandingkan</button>
                     </div>`
 
 var elements =

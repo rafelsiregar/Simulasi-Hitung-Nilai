@@ -141,19 +141,19 @@ function checkPointer(){
 function generateTaskText(i){
     return `<div class="data_tugas" id="tugas_ke_${i}">
 <div class="form-row">
-    <div class="form-group col-2">
+    <div class="form-group col-3">
     <label for="nilai_tugas_${i}">Nilai Tugas : </label>
         <input type="number" id="nilai_tugas_${i}" class="nilai_tugas form-control input-sm nilai-small" value=""
         placeholder="Nilai" min="1" step="0.5">
     </div>
-    <div class="form-group col-2">
+    <div class="form-group col-3">
         <label for="bobot_tugas_${i}">Bobot Tugas : </label>
         <input type="number" id="bobot_tugas_${i}" class="bobot_tugas form-control input-sm nilai-small" value=""
         placeholder="Bobot" min="1" step="0.5">
     </div>
-    <div class="form-check-inline col-2 mt-1">
+    <div class="form-check-inline col-3 mt-1">
         <label for="wajib_tugas_${i}" class="form-check-label">
-            <input type="checkbox" id="wajib_tugas_${i}" class="wajib_tugas form-check-input" checked>Wajib</label>
+            <input type="checkbox" id="wajib_tugas_${i}" class="wajib_tugas form-check-input" style="margin-top:20px;" checked>Wajib</label>
         </div>
 </div>
 </div>`
@@ -164,19 +164,17 @@ function generateMidText(i){
     return `<div class="data_uts" id="uts_nomor_${i}">
     <p>Nomor ${i}</p>
     <div class="form-row">
-        <div class="form-group col-sm-3">
-            <input type="number" id="nilai_uts_${i}" 
-            class="nilai-small nilai_uts form-control" placeholder="Nilai Soal" min="1" step="0.01" value="">
+        <div class="form-group col-sm-6">
+            <input type="number" id="nilai_uts_${i}" class="nilai-std nilai_uts form-control" placeholder="Nilai Soal" min="1" step="0.01" value="">
         </div>
-        <div class="form-group col-sm-3">
-            <input type="number" id="bobot_uts_${i}" class="nilai-small bobot_uts form-control" value=""
-            placeholder="Bobot Soal" min="1" step="0.1">
+        <div class="form-group col-sm-6">
+            <input type="number" id="bobot_uts_${i}" class="nilai-std bobot_uts form-control" value="" placeholder="Bobot Soal" min="1" step="0.1">
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-sm-4">
-                <label for="max_uts_${i}"> Nilai Maksimum : </label>
-            <input type="number" id="max_uts_${i}" class="nilai-small maks_uts form-control"  min="1" step="0.5">
+        <div class="form-group col-sm-6">
+            <label for="max_uts_${i}"> Nilai Maksimum : </label>
+            <input type="number" id="max_uts_${i}" class="nilai-std maks_uts form-control"  min="1" step="0.5">
         </div>
     </div>
 </div>`
@@ -186,18 +184,17 @@ function generateFinalText(i){
     return  `<div class="data_uas" id="uas_nomor_${i}">
     <p>Nomor ${i}</p>
     <div class="form-row">
-        <div class="form-group col-sm-3">
-            <input type="number" id="nilai_uas_${i}" class="nilai-small nilai_uas form-control" placeholder="Nilai Soal" value="" min="1" step=
-            "0.01">
+        <div class="form-group col-sm-6">
+            <input type="number" id="nilai_uas_${i}" class="nilai-std nilai_uas form-control" placeholder="Nilai Soal" value="" min="1" step="0.01">
         </div>
-        <div class="form-group col-sm-3">
-            <input type="number" id="bobot_uas_${i}" class="nilai-small bobot_uas form-control" value="" placeholder="Bobot Soal" min="1" step="0.1">
+        <div class="form-group col-sm-6">
+            <input type="number" id="bobot_uas_${i}" class="nilai-std bobot_uas form-control" value="" placeholder="Bobot Soal" min="1" step="0.1">
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-6">
             <label for="max_uas_${i}"> Nilai Maksimum : </label>
-            <input type="number" id="max_uas_${i}" class="nilai-small maks_uas form-control" min="1" step="0.5">
+            <input type="number" id="max_uas_${i}" class="nilai-std maks_uas form-control" min="1" step="0.5">
         </div>
     </div>
 </div>`
@@ -290,16 +287,22 @@ function countScore(){
     var nilai = {tugas : 0, uts : 0, uas : 0, tambahan : 0};
 
     //Menghitung jumlah bobot
-    var bobot = {tugas : 0, uts : 0, uas : 0, tambahan : 0};
-    var hiddenStatus={tugas : tugas['nilai'].length==0,
-    uts : uts['nilai'].length==0,
-    uas : uas['nilai'].length==0,
-    tambahan : ((tambahan['check'].checked==false)||tambahan['nilai'].length==0)};
+    var bobot = {tugas : 0, 
+                uts : 0, 
+                uas : 0, 
+                tambahan : 0};
 
-    //console.log(hiddenStatus['tugas'] +" "+ hiddenStatus['uts'] +" "+ hiddenStatus['uas'] +" "+ hiddenStatus['tambahan'])
+    var hiddenStatus={tugas : tugas['nilai'].length==0,
+                    uts : uts['nilai'].length==0,
+                    uas : uas['nilai'].length==0,
+                    tambahan : ((tambahan['check']==false)||tambahan['nilai'].length==0)
+                    };
+
+
 
     if(hiddenStatus['tugas'] && hiddenStatus['uts'] && hiddenStatus['uas'] && hiddenStatus['tambahan']){
-        alert("Harap menginput minimal salah satu elemen nilai");
+        
+        renderAlert("Harap menginput minimal salah satu elemen nilai");
         return;
     }
     
@@ -362,11 +365,11 @@ function countScore(){
             errorAlert();
             return;
         }
-        }
+    }
 
 
-        //Menghitung jumlah bobot total
-        bobot_total = bobot_total+Number(tugas.multiplier);
+    //Menghitung jumlah bobot total
+    bobot_total = bobot_total+Number(tugas.multiplier);
 
     //Menghitung nilai tugas apabila ada multiplier
     if(tugas["multiplier"]!=0) nilai["tugas"] = (tugas["multiplier"]/100)*nilai["tugas"];
@@ -376,7 +379,6 @@ function countScore(){
         //Kalau ada UTS
         if(uts["max"]!=null){
 
-           // console.log("Debug : "+uts['nilai'][i].value!="" && uts["max"][i].value!="" && uts["bobot"][i].value=="")
             //Kalau soal yang gak wajib dikerjakan, masukin ke nilai tapi gak usah pake bobot
             if(uts["nilai"][i].value!="" && uts["bobot"][i].value==""){
                 if(uts['max'][i].value=="")
@@ -560,6 +562,7 @@ function countScore(){
         document.getElementById("ket_nilai").style.display="block";
         open("tugas", nilai["tugas"], bobot["tugas"]);open("uts", nilai["uts"],bobot["uts"]);
         open("uas", nilai["uas"], bobot["uas"]);
+        console.log(nilai, bobot, tambahan);
         openAddition(nilai['tambahan'], bobot['tambahan'], tambahan['tambahan']);
         
 
@@ -574,12 +577,13 @@ function countScore(){
             console.log(nilai+" "+bobot);
             var nilai_olah=0;
 
+
+            //Kalau ada bobotnya
             if(bobot!=0) nilai_olah = (nilai/bobot)*100+tambahan;
+            //Kalau tidak ada bobotnya
             else nilai_olah=tambahan;
 
-            if(nilai_olah>100) nilai_olah=100;
-            else if(nilai_olah<0) nilai_olah = 0;
-
+            nilai_olah=Math.min(100, nilai_olah);
 
             document.getElementById("elemen_tambahan").innerHTML=nilai_olah.toFixed(2);
             document.getElementById("bobot_elemen_tambahan").innerHTML=(nilai+tambahan).toFixed(2)+")";
